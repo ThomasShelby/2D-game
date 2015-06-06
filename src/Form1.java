@@ -71,13 +71,11 @@ public class Form1 implements ActionListener{
 	JButton button54 = new JButton();
 	JButton button55 = new JButton();
 	JButton button56 = new JButton();
+
+	static Form1 window;
 	
 	public int level[] = new int[4]; //масив для Level
-	public int field5[] = new int[8]; //масив для ігрового поля для рівня 5 (верхнього рядка)
-	public int field4[] = new int[8]; //масив для ігрового поля для рівня 4
-	public int field3[] = new int[8]; //масив для ігрового поля для рівня 3
-	public int field2[] = new int[8]; //масив для ігрового поля для рівня 2
-	public int field1[] = new int[8]; //масив для ігрового поля для рівня 1
+	public int field[][] = new int[5][8]; //масив для ігрового поля для рівня 5 (верхнього рядка)
     public int NCounter = 0; //Значення лічильника очків
     public int RndE; //Змінна для випадкових чисел	
     public int i;
@@ -87,22 +85,27 @@ public class Form1 implements ActionListener{
     public int vt;
     public int le[] = new int[5]; //Для нумерації рівнів Level
     
-    Timer mainTimer = new Timer(1000, this);
+//    public int time=1000;
+    
+    Timer mainTimer = new Timer(500, this);
 	
 	public char c;
 	
-	public String cs = ""; //Рядок для роботи з button
+	public String cs = "",st = ""; //Рядок для роботи з button
 
-	Color black = new Color(0x000000); //колір символів числових комірок, комірок "T", "P" та "B"
-	Color white = new Color(0xffffff); //колір символів комірок "Z" та "End"
+	Color black = new Color(0x000000); //колір символів числових комірок, комірок "+500", "+100" та "-200"
+	Color white = new Color(0xffffff); //колір символів комірок "Null" та "End"
 	
 	Color plus1 = new Color(0xfffacd); //Фон числових комірок
-	Color plusT = new Color(0x32cd32); //Фон виграшних комірок "T"
-	Color plusP = new Color(0x7b68ee); //Фон виграшних комірок "P"
-	Color plusB = new Color(0xffff00); //Фон виграшних комірок "B"
-	Color plusZ = new Color(0x000000); //Фон комірок "Z"
+	Color plus500 = new Color(0x32cd32); //Фон виграшних комірок "+500"
+	Color plus100 = new Color(0x7b68ee); //Фон виграшних комірок "+100"
+	Color colourMin200 = new Color(0xffff00); //Фон виграшних комірок "-200"
+	Color plusNull = new Color(0x000000); //Фон комірок "Null"
 	Color plusEnd = new Color(0xff0000); //Фон комірок "End"
-	Color blue = new Color(0x0000FF); //Фон для маркера
+	Color blue = new Color(0x000FFF); //Фон для маркера
+	
+	Color lightPlus =new Color(0xfff999); 
+	Color lightMinus =new Color(0xf5deb3); 
 	
 	Color dg; //Для передачі значень кольору фону
 	Color dk; //Для передачі значень кольору символа
@@ -114,10 +117,10 @@ public class Form1 implements ActionListener{
 	
 	public int et; //у цю змінну будуть записані результати перерахунку значень масиву field1[]
 
-	
 	public int i56;
 	public String c56 = "";
 	public int IndLent; //Визначає довжину кольорового лінійного індикатора
+	
 	
 	/**
 	 * Launch the application.
@@ -126,7 +129,7 @@ public class Form1 implements ActionListener{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Form1 window = new Form1();
+					window = new Form1();
 					window.frmMYaremchukGame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -147,16 +150,12 @@ public class Form1 implements ActionListener{
         NCounter = RndE; //Початкове значення рахунку
 		firstset = 0; //Триггер - Маркер ще не поставлений
 		//Заповнюємо масиви комірок filed1 - filed5 значеннями генератора випадкових чисел
-				for (int i=0; i<8; i++)
-		{
-					field1[i] = (int)(19*Math.random()); //генерує випадкове число = 0 до 19
-					field2[i] = (int)(19*Math.random()); //генерує випадкове число = 0 до 19
-					field3[i] = (int)(19*Math.random()); //генерує випадкове число = 0 до 19
-					field4[i] = (int)(19*Math.random()); //генерує випадкове число = 0 до 19
-					field5[i] = (int)(19*Math.random()); //генерує випадкове число = 0 до 19
+		for(int j=0;j<5;j++){
+			for (int i=0; i<8; i++){
+					field[j][i] = (int)(19*Math.random()); //генерує випадкове число = 0 до 19
+					}
 		}
-//			fdraw(); //Намалювати значення комірок - Для налагодження
-		Field_Fill(); //Заповнити комірки ігрового поля значеннями
+		Field_Fill();//Заповнити комірки ігрового поля значеннями
 		IndLent = 0; //Довжина лінійного кольорового індикатора максимальна
 		
 		
@@ -167,724 +166,375 @@ public class Form1 implements ActionListener{
 		le[4] = 5;
 	}
 
-    public void fdraw() 
-	{ //Намалювати значення масивів field1 - field5 у комірки
-	  //щоб проконтролювати заповнення масивів
-		cs = cs + field1[0];
-		button15.setText(cs);
-		cs = "";
-		cs = cs + field1[1];
-		button16.setText(cs);
-		cs = "";
-		cs = cs + field1[2];
-		button17.setText(cs);
-		cs = "";
-		cs = cs + field1[3];
-		button18.setText(cs);
-		cs = "";
-		cs = cs + field1[4];
-		button19.setText(cs);
-		cs = "";
-		cs = cs + field1[5];
-		button20.setText(cs);
-		cs = "";
-		cs = cs + field1[6];
-		button21.setText(cs);
-		cs = "";
-		cs = cs + field1[7];
-		button22.setText(cs);
-	
-	}
-	
-    public void Color_Chars(int i) 
+    public void colorChars(int r,int i) 
 	{ //За значеннями елементів масивів field1 - field5 визначити атрибути та номінал
-	  //комірок та записати їх у button56
+	  //комірок та записати їх
+    			if (field[r][i] == 0){ 
+    				cs ="+1";
+    				dg = lightPlus;
+    				dk = black;
+    				}
+    			if (field[r][i] == 1){
+    				cs ="-1";
+    				dg = lightMinus;
+    				dk = black;
+    				}
+    			
+    			if (field[r][i] == 2){
+    				cs = "+5";
+    				dg = lightPlus;
+    				dk = black;
+    				}
 
-		if (field1[i] == 0) button56.setText("+1");
-		if (field1[i] == 0) button56.setBackground(plus1);
-		if (field1[i] == 0) button56.setForeground(black);
-	
-		if (field1[i] == 1) button56.setText("-1");
-		if (field1[i] == 1) button56.setBackground(plus1);
-		if (field1[i] == 1) button56.setForeground(black);
-	
-		if (field1[i] == 2) button56.setText("+5");
-		if (field1[i] == 2) button56.setBackground(plus1);
-		if (field1[i] == 2) button56.setForeground(black);
-	
-		if (field1[i] == 3) button56.setText("-5");
-		if (field1[i] == 3) button56.setBackground(plus1);
-		if (field1[i] == 3) button56.setForeground(black);
-	
-		if (field1[i] == 4) button56.setText("+10");
-		if (field1[i] == 4) button56.setBackground(plus1);
-		if (field1[i] == 4) button56.setForeground(black);
-	
-		if (field1[i] == 5) button56.setText("-10");
-		if (field1[i] == 5) button56.setBackground(plus1);
-		if (field1[i] == 5) button56.setForeground(black);
-	
-		if (field1[i] == 6) button56.setText("+15");
-		if (field1[i] == 6) button56.setBackground(plus1);
-		if (field1[i] == 6) button56.setForeground(black);
-	
-		if (field1[i] == 7) button56.setText("-15");
-		if (field1[i] == 7) button56.setBackground(plus1);
-		if (field1[i] == 7) button56.setForeground(black);
-	
-		if (field1[i] == 8) button56.setText("+25");
-		if (field1[i] == 8) button56.setBackground(plus1);
-		if (field1[i] == 8) button56.setForeground(black);
-	
-		if (field1[i] == 9) button56.setText("T");
-		if (field1[i] == 9) button56.setBackground(plusT);
-		if (field1[i] == 9) button56.setForeground(black);
-	
-		if (field1[i] == 10) button56.setText("P");
-		if (field1[i] == 10) button56.setBackground(plusP);
-		if (field1[i] == 10) button56.setForeground(black);
+    			if (field[r][i] == 3){
+    				cs = "-5";
+    				dg = lightMinus;
+    				dk = black;
+    				}
 
-		if (field1[i] == 11) button56.setText("B");
-		if (field1[i] == 11) button56.setBackground(plusB);
-		if (field1[i] == 11) button56.setForeground(black);
+    			if (field[r][i] == 4){
+    				cs = "+10";
+    				dg = lightPlus;
+    				dk = black;
+    				}
 
-		if (field1[i] == 12) button56.setText("Z");
-		if (field1[i] == 12) button56.setBackground(plusZ);
-		if (field1[i] == 12) button56.setForeground(white);
-	
-		if (field1[i] == 13) button56.setText("Z");
-		if (field1[i] == 13) button56.setBackground(plusZ);
-		if (field1[i] == 13) button56.setForeground(white);
-	
-		if (field1[i] == 14) button56.setText("End");
-		if (field1[i] == 14) button56.setBackground(plusEnd);
-		if (field1[i] == 14) button56.setForeground(white);
-	
-		if (field1[i] == 15) button56.setText("-10");
-		if (field1[i] == 15) button56.setBackground(plus1);
-		if (field1[i] == 15) button56.setForeground(black);
+    			if (field[r][i] == 5){
+    				cs = "-10";
+    				dg = lightMinus;
+    				dk = black;
+    				}
 
-		if (field1[i] == 16) button56.setText("-5");
-		if (field1[i] == 16) button56.setBackground(plus1);
-		if (field1[i] == 16) button56.setForeground(black);
+    			if (field[r][i] == 6){
+    				cs = "+15";
+    				dg = lightPlus;
+    				dk = black;
+    				}
 
-		if (field1[i] == 17) button56.setText("-1");
-		if (field1[i] == 17) button56.setBackground(plus1);
-		if (field1[i] == 17) button56.setForeground(black);
+    			if (field[r][i] == 7){
+    				cs = "-15";
+    				dg = lightMinus;
+    				dk = black;
+    				}
 
-		if (field1[i] == 18) button56.setText("+1");
-		if (field1[i] == 18) button56.setBackground(plus1);
-		if (field1[i] == 18) button56.setForeground(black);
-	
-		if (field1[i] == 19) button56.setText("+5");
-		if (field1[i] == 19) button56.setBackground(plus1);
-		if (field1[i] == 19) button56.setForeground(black);
-				
+    			if (field[r][i] == 8){
+    				cs = "+25";
+    				dg = lightPlus;
+    				dk = black;
+    				}
 
-	}
+    			if (field[r][i] == 9){
+    				cs = "+500";
+    				dg = plus500;
+    				dk = black;
+    				}
 
-    public void Color_Chars2(int i) 
-	{ //За значеннями елементів масивів field1 - field5 визначити атрибути та номінал
-  	  //комірок та записати їх у button56
+    			if (field[r][i] == 10){
+    				cs = "+100";
+    				dg = plus100;
+    				dk = black;
+    				}
 
-		if (field2[i] == 0) button56.setText("+1");
-		if (field2[i] == 0) button56.setBackground(plus1);
-		if (field2[i] == 0) button56.setForeground(black);
-	
-		if (field2[i] == 1) button56.setText("-1");
-		if (field2[i] == 1) button56.setBackground(plus1);
-		if (field2[i] == 1) button56.setForeground(black);
-	
-		if (field2[i] == 2) button56.setText("+5");
-		if (field2[i] == 2) button56.setBackground(plus1);
-		if (field2[i] == 2) button56.setForeground(black);
-	
-		if (field2[i] == 3) button56.setText("-5");
-		if (field2[i] == 3) button56.setBackground(plus1);
-		if (field2[i] == 3) button56.setForeground(black);
-	
-		if (field2[i] == 4) button56.setText("+10");
-		if (field2[i] == 4) button56.setBackground(plus1);
-		if (field2[i] == 4) button56.setForeground(black);
-	
-		if (field2[i] == 5) button56.setText("-10");
-		if (field2[i] == 5) button56.setBackground(plus1);
-		if (field2[i] == 5) button56.setForeground(black);
-	
-		if (field2[i] == 6) button56.setText("+15");
-		if (field2[i] == 6) button56.setBackground(plus1);
-		if (field2[i] == 6) button56.setForeground(black);
-	
-		if (field2[i] == 7) button56.setText("-15");
-		if (field2[i] == 7) button56.setBackground(plus1);
-		if (field2[i] == 7) button56.setForeground(black);
-	
-		if (field2[i] == 8) button56.setText("+25");
-		if (field2[i] == 8) button56.setBackground(plus1);
-		if (field2[i] == 8) button56.setForeground(black);
-	
-		if (field2[i] == 9) button56.setText("T");
-		if (field2[i] == 9) button56.setBackground(plusT);
-		if (field2[i] == 9) button56.setForeground(black);
-	
-		if (field2[i] == 10) button56.setText("P");
-		if (field2[i] == 10) button56.setBackground(plusP);
-		if (field2[i] == 10) button56.setForeground(black);
+    			if (field[r][i] == 11){
+    				cs = "-200";
+    				dg = colourMin200;
+    				dk = black;
+    				}
 
-		if (field2[i] == 11) button56.setText("B");
-		if (field2[i] == 11) button56.setBackground(plusB);
-		if (field2[i] == 11) button56.setForeground(black);
+    			if (field[r][i] == 12){
+    				cs = "Null";
+    				dg = plusNull;
+    				dk = white;
+    				}
 
-		if (field2[i] == 12) button56.setText("Z");
-		if (field2[i] == 12) button56.setBackground(plusZ);
-		if (field2[i] == 12) button56.setForeground(white);
-	
-		if (field2[i] == 13) button56.setText("Z");
-		if (field2[i] == 13) button56.setBackground(plusZ);
-		if (field2[i] == 13) button56.setForeground(white);
-	
-		if (field2[i] == 14) button56.setText("End");
-		if (field2[i] == 14) button56.setBackground(plusEnd);
-		if (field2[i] == 14) button56.setForeground(white);
-	
-		if (field2[i] == 15) button56.setText("-10");
-		if (field2[i] == 15) button56.setBackground(plus1);
-		if (field2[i] == 15) button56.setForeground(black);
+    			if (field[r][i] == 13){
+    				cs = "Null";
+    				dg = plusNull;
+    				dk = white;
+    				}
 
-		if (field2[i] == 16) button56.setText("-5");
-		if (field2[i] == 16) button56.setBackground(plus1);
-		if (field2[i] == 16) button56.setForeground(black);
+    			if (field[r][i] == 14){
+    				cs = "End";
+    				dg = plusEnd;
+    				dk = white;
+    				}
 
-		if (field2[i] == 17) button56.setText("-1");
-		if (field2[i] == 17) button56.setBackground(plus1);
-		if (field2[i] == 17) button56.setForeground(black);
+    			if (field[r][i] == 15){
+    				cs = "-10";
+    				dg = lightMinus;
+    				dk = black;
+    				}
 
-		if (field2[i] == 18) button56.setText("+1");
-		if (field2[i] == 18) button56.setBackground(plus1);
-		if (field2[i] == 18) button56.setForeground(black);
-	
-		if (field2[i] == 19) button56.setText("+5");
-		if (field2[i] == 19) button56.setBackground(plus1);
-		if (field2[i] == 19) button56.setForeground(black);
-				
+    			if (field[r][i] == 16){
+    				cs = "-5";
+    				dg = lightMinus;
+    				dk = black;
+    				}
 
-	}
+    			if (field[r][i] == 17){
+    				cs = "-1";
+    				dg = lightMinus;
+    				dk = black;
+    				}
 
+    			if (field[r][i] == 18){
+    				cs = "+1";
+    				dg = lightPlus;
+    				dk = black;
+    				}
 
-    public void Color_Chars3(int i) 
-	{ //За значеннями елементів масивів field1 - field5 визначити атрибути та номінал
-  	  //комірок та записати їх у button56
-
-		if (field3[i] == 0) button56.setText("+1");
-		if (field3[i] == 0) button56.setBackground(plus1);
-		if (field3[i] == 0) button56.setForeground(black);
-	
-		if (field3[i] == 1) button56.setText("-1");
-		if (field3[i] == 1) button56.setBackground(plus1);
-		if (field3[i] == 1) button56.setForeground(black);
-	
-		if (field3[i] == 2) button56.setText("+5");
-		if (field3[i] == 2) button56.setBackground(plus1);
-		if (field3[i] == 2) button56.setForeground(black);
-	
-		if (field3[i] == 3) button56.setText("-5");
-		if (field3[i] == 3) button56.setBackground(plus1);
-		if (field3[i] == 3) button56.setForeground(black);
-	
-		if (field3[i] == 4) button56.setText("+10");
-		if (field3[i] == 4) button56.setBackground(plus1);
-		if (field3[i] == 4) button56.setForeground(black);
-	
-		if (field3[i] == 5) button56.setText("-10");
-		if (field3[i] == 5) button56.setBackground(plus1);
-		if (field3[i] == 5) button56.setForeground(black);
-	
-		if (field3[i] == 6) button56.setText("+15");
-		if (field3[i] == 6) button56.setBackground(plus1);
-		if (field3[i] == 6) button56.setForeground(black);
-	
-		if (field3[i] == 7) button56.setText("-15");
-		if (field3[i] == 7) button56.setBackground(plus1);
-		if (field3[i] == 7) button56.setForeground(black);
-	
-		if (field3[i] == 8) button56.setText("+25");
-		if (field3[i] == 8) button56.setBackground(plus1);
-		if (field3[i] == 8) button56.setForeground(black);
-	
-		if (field3[i] == 9) button56.setText("T");
-		if (field3[i] == 9) button56.setBackground(plusT);
-		if (field3[i] == 9) button56.setForeground(black);
-	
-		if (field3[i] == 10) button56.setText("P");
-		if (field3[i] == 10) button56.setBackground(plusP);
-		if (field3[i] == 10) button56.setForeground(black);
-
-		if (field3[i] == 11) button56.setText("B");
-		if (field3[i] == 11) button56.setBackground(plusB);
-		if (field3[i] == 11) button56.setForeground(black);
-
-		if (field3[i] == 12) button56.setText("Z");
-		if (field3[i] == 12) button56.setBackground(plusZ);
-		if (field3[i] == 12) button56.setForeground(white);
-	
-		if (field3[i] == 13) button56.setText("Z");
-		if (field3[i] == 13) button56.setBackground(plusZ);
-		if (field3[i] == 13) button56.setForeground(white);
-	
-		if (field3[i] == 14) button56.setText("End");
-		if (field3[i] == 14) button56.setBackground(plusEnd);
-		if (field3[i] == 14) button56.setForeground(white);
-	
-		if (field3[i] == 15) button56.setText("-10");
-		if (field3[i] == 15) button56.setBackground(plus1);
-		if (field3[i] == 15) button56.setForeground(black);
-
-		if (field3[i] == 16) button56.setText("-5");
-		if (field3[i] == 16) button56.setBackground(plus1);
-		if (field3[i] == 16) button56.setForeground(black);
-
-		if (field3[i] == 17) button56.setText("-1");
-		if (field3[i] == 17) button56.setBackground(plus1);
-		if (field3[i] == 17) button56.setForeground(black);
-
-		if (field3[i] == 18) button56.setText("+1");
-		if (field3[i] == 18) button56.setBackground(plus1);
-		if (field3[i] == 18) button56.setForeground(black);
-	
-		if (field3[i] == 19) button56.setText("+5");
-		if (field3[i] == 19) button56.setBackground(plus1);
-		if (field3[i] == 19) button56.setForeground(black);
-				
-
-	}
-
-
-    public void Color_Chars4(int i) 
-	{ //За значеннями елементів масивів field1 - field5 визначити атрибути та номінал
-  	  //комірок та записати їх у button56
-
-		if (field4[i] == 0) button56.setText("+1");
-		if (field4[i] == 0) button56.setBackground(plus1);
-		if (field4[i] == 0) button56.setForeground(black);
-	
-		if (field4[i] == 1) button56.setText("-1");
-		if (field4[i] == 1) button56.setBackground(plus1);
-		if (field4[i] == 1) button56.setForeground(black);
-	
-		if (field4[i] == 2) button56.setText("+5");
-		if (field4[i] == 2) button56.setBackground(plus1);
-		if (field4[i] == 2) button56.setForeground(black);
-	
-		if (field4[i] == 3) button56.setText("-5");
-		if (field4[i] == 3) button56.setBackground(plus1);
-		if (field4[i] == 3) button56.setForeground(black);
-	
-		if (field4[i] == 4) button56.setText("+10");
-		if (field4[i] == 4) button56.setBackground(plus1);
-		if (field4[i] == 4) button56.setForeground(black);
-	
-		if (field4[i] == 5) button56.setText("-10");
-		if (field4[i] == 5) button56.setBackground(plus1);
-		if (field4[i] == 5) button56.setForeground(black);
-	
-		if (field4[i] == 6) button56.setText("+15");
-		if (field4[i] == 6) button56.setBackground(plus1);
-		if (field4[i] == 6) button56.setForeground(black);
-	
-		if (field4[i] == 7) button56.setText("-15");
-		if (field4[i] == 7) button56.setBackground(plus1);
-		if (field4[i] == 7) button56.setForeground(black);
-	
-		if (field4[i] == 8) button56.setText("+25");
-		if (field4[i] == 8) button56.setBackground(plus1);
-		if (field4[i] == 8) button56.setForeground(black);
-	
-		if (field4[i] == 9) button56.setText("T");
-		if (field4[i] == 9) button56.setBackground(plusT);
-		if (field4[i] == 9) button56.setForeground(black);
-	
-		if (field4[i] == 10) button56.setText("P");
-		if (field4[i] == 10) button56.setBackground(plusP);
-		if (field4[i] == 10) button56.setForeground(black);
-
-		if (field4[i] == 11) button56.setText("B");
-		if (field4[i] == 11) button56.setBackground(plusB);
-		if (field4[i] == 11) button56.setForeground(black);
-
-		if (field4[i] == 12) button56.setText("Z");
-		if (field4[i] == 12) button56.setBackground(plusZ);
-		if (field4[i] == 12) button56.setForeground(white);
-	
-		if (field4[i] == 13) button56.setText("Z");
-		if (field4[i] == 13) button56.setBackground(plusZ);
-		if (field4[i] == 13) button56.setForeground(white);
-	
-		if (field4[i] == 14) button56.setText("End");
-		if (field4[i] == 14) button56.setBackground(plusEnd);
-		if (field4[i] == 14) button56.setForeground(white);
-	
-		if (field4[i] == 15) button56.setText("-10");
-		if (field4[i] == 15) button56.setBackground(plus1);
-		if (field4[i] == 15) button56.setForeground(black);
-
-		if (field4[i] == 16) button56.setText("-5");
-		if (field4[i] == 16) button56.setBackground(plus1);
-		if (field4[i] == 16) button56.setForeground(black);
-
-		if (field4[i] == 17) button56.setText("-1");
-		if (field4[i] == 17) button56.setBackground(plus1);
-		if (field4[i] == 17) button56.setForeground(black);
-
-		if (field4[i] == 18) button56.setText("+1");
-		if (field4[i] == 18) button56.setBackground(plus1);
-		if (field4[i] == 18) button56.setForeground(black);
-	
-		if (field4[i] == 19) button56.setText("+5");
-		if (field4[i] == 19) button56.setBackground(plus1);
-		if (field4[i] == 19) button56.setForeground(black);
-				
-
-	}
-
-
-    public void Color_Chars5(int i) 
-	{ //За значеннями елементів масивів field1 - field5 визначити атрибути та номінал
-  	  //комірок та записати їх у button56
-
-		if (field5[i] == 0) button56.setText("+1");
-		if (field5[i] == 0) button56.setBackground(plus1);
-		if (field5[i] == 0) button56.setForeground(black);
-	
-		if (field5[i] == 1) button56.setText("-1");
-		if (field5[i] == 1) button56.setBackground(plus1);
-		if (field5[i] == 1) button56.setForeground(black);
-	
-		if (field5[i] == 2) button56.setText("+5");
-		if (field5[i] == 2) button56.setBackground(plus1);
-		if (field5[i] == 2) button56.setForeground(black);
-	
-		if (field5[i] == 3) button56.setText("-5");
-		if (field5[i] == 3) button56.setBackground(plus1);
-		if (field5[i] == 3) button56.setForeground(black);
-	
-		if (field5[i] == 4) button56.setText("+10");
-		if (field5[i] == 4) button56.setBackground(plus1);
-		if (field5[i] == 4) button56.setForeground(black);
-	
-		if (field5[i] == 5) button56.setText("-10");
-		if (field5[i] == 5) button56.setBackground(plus1);
-		if (field5[i] == 5) button56.setForeground(black);
-	
-		if (field5[i] == 6) button56.setText("+15");
-		if (field5[i] == 6) button56.setBackground(plus1);
-		if (field5[i] == 6) button56.setForeground(black);
-	
-		if (field5[i] == 7) button56.setText("-15");
-		if (field5[i] == 7) button56.setBackground(plus1);
-		if (field5[i] == 7) button56.setForeground(black);
-	
-		if (field5[i] == 8) button56.setText("+25");
-		if (field5[i] == 8) button56.setBackground(plus1);
-		if (field5[i] == 8) button56.setForeground(black);
-	
-		if (field5[i] == 9) button56.setText("T");
-		if (field5[i] == 9) button56.setBackground(plusT);
-		if (field5[i] == 9) button56.setForeground(black);
-	
-		if (field5[i] == 10) button56.setText("P");
-		if (field5[i] == 10) button56.setBackground(plusP);
-		if (field5[i] == 10) button56.setForeground(black);
-
-		if (field5[i] == 11) button56.setText("B");
-		if (field5[i] == 11) button56.setBackground(plusB);
-		if (field5[i] == 11) button56.setForeground(black);
-
-		if (field5[i] == 12) button56.setText("Z");
-		if (field5[i] == 12) button56.setBackground(plusZ);
-		if (field5[i] == 12) button56.setForeground(white);
-	
-		if (field5[i] == 13) button56.setText("Z");
-		if (field5[i] == 13) button56.setBackground(plusZ);
-		if (field5[i] == 13) button56.setForeground(white);
-	
-		if (field5[i] == 14) button56.setText("End");
-		if (field5[i] == 14) button56.setBackground(plusEnd);
-		if (field5[i] == 14) button56.setForeground(white);
-	
-		if (field5[i] == 15) button56.setText("-10");
-		if (field5[i] == 15) button56.setBackground(plus1);
-		if (field5[i] == 15) button56.setForeground(black);
-
-		if (field5[i] == 16) button56.setText("-5");
-		if (field5[i] == 16) button56.setBackground(plus1);
-		if (field5[i] == 16) button56.setForeground(black);
-
-		if (field5[i] == 17) button56.setText("-1");
-		if (field5[i] == 17) button56.setBackground(plus1);
-		if (field5[i] == 17) button56.setForeground(black);
-
-		if (field5[i] == 18) button56.setText("+1");
-		if (field5[i] == 18) button56.setBackground(plus1);
-		if (field5[i] == 18) button56.setForeground(black);
-	
-		if (field5[i] == 19) button56.setText("+5");
-		if (field5[i] == 19) button56.setBackground(plus1);
-		if (field5[i] == 19) button56.setForeground(black);
-				
-
-	}
-
+    			if (field[r][i] == 19){
+    				cs = "+5";
+    				dg = lightPlus;
+    				dk = black;
+    				}
+    			}
 
 	public void Field_Fill() 
-	{ //процес копіювання номіналів та атрибутів з "чергової" button56
-	  //у комірки ігрового поля button7 - button46
+	{ 
+		int r;
 						for (int i=0; i<8; i++)
 		{
-			Color_Chars(i); //Записати номінал та атрибути комірки у button56
-			cs = button56.getText(); //записати номінал з button56 у змінну cs
-			if (i == 0) button7.setText(cs);
-			if (i == 1) button8.setText(cs);
-			if (i == 2) button9.setText(cs);
-			if (i == 3) button10.setText(cs);
-			if (i == 4) button11.setText(cs);
-			if (i == 5) button12.setText(cs);
-			if (i == 6) button13.setText(cs);
-			if (i == 7) button14.setText(cs);
+							colorChars(0,i); 
+							if (i == 0){ 
+								button39.setText(cs);
+								button39.setBackground(dg);
+								button39.setForeground(dk);
+								}
+							if (i == 1) {
+								button40.setText(cs);
+								button40.setBackground(dg);
+								button40.setForeground(dk);
+							}
+							if (i == 2) {
+								button41.setText(cs);
+								button41.setBackground(dg);
+								button41.setForeground(dk);
+							}
+							if (i == 3) {
+								button42.setText(cs);
+								button42.setBackground(dg);
+								button42.setForeground(dk);
+							}
+							if (i == 4) {
+								button43.setText(cs);
+								button43.setBackground(dg);
+								button43.setForeground(dk);
+							}
+							if (i == 5) {
+								button44.setText(cs);
+								button44.setBackground(dg);
+								button44.setForeground(dk);
+							}
+							if (i == 6) {
+								button45.setText(cs);
+								button45.setBackground(dg);
+								button45.setForeground(dk);
+							}
+							if (i == 7) {
+								button46.setText(cs);
+								button46.setBackground(dg);
+								button46.setForeground(dk);
+							}
+
+							cs = "";							
+
+							//------------------------------------------
+							
+							colorChars(1,i); 
+							if (i == 0){ 
+								button31.setText(cs);
+								button31.setBackground(dg);
+								button31.setForeground(dk);
+								}
+							if (i == 1) {
+								button32.setText(cs);
+								button32.setBackground(dg);
+								button32.setForeground(dk);
+							}
+							if (i == 2) {
+								button33.setText(cs);
+								button33.setBackground(dg);
+								button33.setForeground(dk);
+							}
+							if (i == 3) {
+								button34.setText(cs);
+								button34.setBackground(dg);
+								button34.setForeground(dk);
+							}
+							if (i == 4) {
+								button35.setText(cs);
+								button35.setBackground(dg);
+								button35.setForeground(dk);
+							}
+							if (i == 5) {
+								button36.setText(cs);
+								button36.setBackground(dg);
+								button36.setForeground(dk);
+							}
+							if (i == 6) {
+								button37.setText(cs);
+								button37.setBackground(dg);
+								button37.setForeground(dk);
+							}
+							if (i == 7) {
+								button38.setText(cs);
+								button38.setBackground(dg);
+								button38.setForeground(dk);
+							}
+							
+					cs = "";
+
+					//------------------------------------------
+					
+					colorChars(2,i);
+					if (i == 0){ 
+						button23.setText(cs);
+						button23.setBackground(dg);
+						button23.setForeground(dk);
+						}
+					if (i == 1) {
+						button24.setText(cs);
+						button24.setBackground(dg);
+						button24.setForeground(dk);
+					}
+					if (i == 2) {
+						button25.setText(cs);
+						button25.setBackground(dg);
+						button25.setForeground(dk);
+					}
+					if (i == 3) {
+						button26.setText(cs);
+						button26.setBackground(dg);
+						button26.setForeground(dk);
+					}
+					if (i == 4) {
+						button27.setText(cs);
+						button27.setBackground(dg);
+						button27.setForeground(dk);
+					}
+					if (i == 5) {
+						button28.setText(cs);
+						button28.setBackground(dg);
+						button28.setForeground(dk);
+					}
+					if (i == 6) {
+						button29.setText(cs);
+						button29.setBackground(dg);
+						button29.setForeground(dk);
+					}
+					if (i == 7) {
+						button30.setText(cs);
+						button30.setBackground(dg);
+						button30.setForeground(dk);
+					}
+					
+			cs = "";
+					
+			//------------------------------------------
 			
-			dg = button56.getBackground(); //записати BackColor з button56 у змінну dg
-			if (i == 0) button7.setBackground(dg);
-			if (i == 1) button8.setBackground(dg);
-			if (i == 2) button9.setBackground(dg);
-			if (i == 3) button10.setBackground(dg);
-			if (i == 4) button11.setBackground(dg);
-			if (i == 5) button12.setBackground(dg);
-			if (i == 6) button13.setBackground(dg);
-			if (i == 7) button14.setBackground(dg);
-
-			dk = button56.getForeground(); //записати ForeColor з button56 у змінну dk
-			if (i == 0) button7.setForeground(dk);
-			if (i == 1) button8.setForeground(dk);
-			if (i == 2) button9.setForeground(dk);
-			if (i == 3) button10.setForeground(dk);
-			if (i == 4) button11.setForeground(dk);
-			if (i == 5) button12.setForeground(dk);
-			if (i == 6) button13.setForeground(dk);
-			if (i == 7) button14.setForeground(dk);
-
-	cs = "";
-
-	//------------------------------------------
-	
-			Color_Chars2(i); //Записати номінал та атрибути комірки у button56
-			cs = button56.getText(); //записати номінал з button56 у змінну cs
-			if (i == 0) button15.setText(cs);
-			if (i == 1) button16.setText(cs);
-			if (i == 2) button17.setText(cs);
-			if (i == 3) button18.setText(cs);
-			if (i == 4) button19.setText(cs);
-			if (i == 5) button20.setText(cs);
-			if (i == 6) button21.setText(cs);
-			if (i == 7) button22.setText(cs);
-			
-			dg = button56.getBackground(); //записати BackColor з button56 у змінну dg
-			if (i == 0) button15.setBackground(dg);
-			if (i == 1) button16.setBackground(dg);
-			if (i == 2) button17.setBackground(dg);
-			if (i == 3) button18.setBackground(dg);
-			if (i == 4) button19.setBackground(dg);
-			if (i == 5) button20.setBackground(dg);
-			if (i == 6) button21.setBackground(dg);
-			if (i == 7) button22.setBackground(dg);
-
-			dk = button56.getForeground(); //записати ForeColor з button56 у змінну dk
-			if (i == 0) button15.setForeground(dk);
-			if (i == 1) button16.setForeground(dk);
-			if (i == 2) button17.setForeground(dk);
-			if (i == 3) button18.setForeground(dk);
-			if (i == 4) button19.setForeground(dk);
-			if (i == 5) button20.setForeground(dk);
-			if (i == 6) button21.setForeground(dk);
-			if (i == 7) button22.setForeground(dk);
-
-	cs = "";
-
-	//------------------------------------------
-	
-			Color_Chars3(i); //записати номінал та атрибути комірки у button56
-			cs = button56.getText(); //записати номінал з button56 у змінну cs
-			if (i == 0) button23.setText(cs);
-			if (i == 1) button24.setText(cs);
-			if (i == 2) button25.setText(cs);
-			if (i == 3) button26.setText(cs);
-			if (i == 4) button27.setText(cs);
-			if (i == 5) button28.setText(cs);
-			if (i == 6) button29.setText(cs);
-			if (i == 7) button30.setText(cs);
-			
-			dg = button56.getBackground(); //записати BackColor з button56 у змінну dg
-			if (i == 0) button23.setBackground(dg);
-			if (i == 1) button24.setBackground(dg);
-			if (i == 2) button25.setBackground(dg);
-			if (i == 3) button26.setBackground(dg);
-			if (i == 4) button27.setBackground(dg);
-			if (i == 5) button28.setBackground(dg);
-			if (i == 6) button29.setBackground(dg);
-			if (i == 7) button30.setBackground(dg);
-
-			dk = button56.getForeground(); //записати ForeColor з button56 у змінну dk
-			if (i == 0) button23.setForeground(dk);
-			if (i == 1) button24.setForeground(dk);
-			if (i == 2) button25.setForeground(dk);
-			if (i == 3) button26.setForeground(dk);
-			if (i == 4) button27.setForeground(dk);
-			if (i == 5) button28.setForeground(dk);
-			if (i == 6) button29.setForeground(dk);
-			if (i == 7) button30.setForeground(dk);
-
-	cs = "";
-
-	//------------------------------------------
-	
-			Color_Chars4(i); //записати номінал та атрибути комірки у button56
-			cs = button56.getText(); //записати номінал з button56 у змінну cs
-			if (i == 0) button31.setText(cs);
-			if (i == 1) button32.setText(cs);
-			if (i == 2) button33.setText(cs);
-			if (i == 3) button34.setText(cs);
-			if (i == 4) button35.setText(cs);
-			if (i == 5) button36.setText(cs);
-			if (i == 6) button37.setText(cs);
-			if (i == 7) button38.setText(cs);
-			
-			dg = button56.getBackground(); //записати BackColor з button56 у змінну dg
-			if (i == 0) button31.setBackground(dg);
-			if (i == 1) button32.setBackground(dg);
-			if (i == 2) button33.setBackground(dg);
-			if (i == 3) button34.setBackground(dg);
-			if (i == 4) button35.setBackground(dg);
-			if (i == 5) button36.setBackground(dg);
-			if (i == 6) button37.setBackground(dg);
-			if (i == 7) button38.setBackground(dg);
-
-			dk = button56.getForeground(); //записати ForeColor з button56 у змінну dk
-			if (i == 0) button31.setForeground(dk);
-			if (i == 1) button32.setForeground(dk);
-			if (i == 2) button33.setForeground(dk);
-			if (i == 3) button34.setForeground(dk);
-			if (i == 4) button35.setForeground(dk);
-			if (i == 5) button36.setForeground(dk);
-			if (i == 6) button37.setForeground(dk);
-			if (i == 7) button38.setForeground(dk);
-
-	cs = "";
-
-	//------------------------------------------
-	
-			Color_Chars5(i); //записати номінал та атрибути комірки у button56
-			cs = button56.getText(); //записати номінал з button56 у змінну cs
-			if (i == 0) button39.setText(cs);
-			if (i == 1) button40.setText(cs);
-			if (i == 2) button41.setText(cs);
-			if (i == 3) button42.setText(cs);
-			if (i == 4) button43.setText(cs);
-			if (i == 5) button44.setText(cs);
-			if (i == 6) button45.setText(cs);
-			if (i == 7) button46.setText(cs);
-			
-			dg = button56.getBackground(); //записати BackColor з button56 у змінну dg
-			if (i == 0) button39.setBackground(dg);
-			if (i == 1) button40.setBackground(dg);
-			if (i == 2) button41.setBackground(dg);
-			if (i == 3) button42.setBackground(dg);
-			if (i == 4) button43.setBackground(dg);
-			if (i == 5) button44.setBackground(dg);
-			if (i == 6) button45.setBackground(dg);
-			if (i == 7) button46.setBackground(dg);
-
-			dk = button56.getForeground(); //записати ForeColor з button56 у змінну dk
-			if (i == 0) button39.setForeground(dk);
-			if (i == 1) button40.setForeground(dk);
-			if (i == 2) button41.setForeground(dk);
-			if (i == 3) button42.setForeground(dk);
-			if (i == 4) button43.setForeground(dk);
-			if (i == 5) button44.setForeground(dk);
-			if (i == 6) button45.setForeground(dk);
-			if (i == 7) button46.setForeground(dk);
-
-	cs = "";
-
+			colorChars(3,i); 
+			if (i == 0){ 
+				button15.setText(cs);
+				button15.setBackground(dg);
+				button15.setForeground(dk);
+				}
+			if (i == 1) {
+				button16.setText(cs);
+				button16.setBackground(dg);
+				button16.setForeground(dk);
 			}
-	}
+			if (i == 2) {
+				button17.setText(cs);
+				button17.setBackground(dg);
+				button17.setForeground(dk);
+			}
+			if (i == 3) {
+				button18.setText(cs);
+				button18.setBackground(dg);
+				button18.setForeground(dk);
+			}
+			if (i == 4) {
+				button19.setText(cs);
+				button19.setBackground(dg);
+				button19.setForeground(dk);
+			}
+			if (i == 5) {
+				button20.setText(cs);
+				button20.setBackground(dg);
+				button20.setForeground(dk);
+			}
+			if (i == 6) {
+				button21.setText(cs);
+				button21.setBackground(dg);
+				button21.setForeground(dk);
+			}
+			if (i == 7) {
+				button22.setText(cs);
+				button22.setBackground(dg);
+				button22.setForeground(dk);
+			}
 
-	public void Num_Move() 
-	{ //процес для переписування номіналів комірок та кольорових атрибутів
-	  //при зсуві комірок зверху вниз
-			for (int i=0; i<8; i++)
-		{
-		field1[i] = field2[i];
-		field2[i] = field3[i];
-		field3[i] = field4[i];
-		field4[i] = field5[i];
-		}	
-			
-		//А масив комірок filed5 заповнимо новими значеннями генератора випадкових чисел
-		Up_Str_App();
-				
-		
-		Field_Fill(); //Намалювати на екран номінали та кольорові атрибути комірок
+	cs = "";					
+							
+			colorChars(4,i); 
+			if (i == 0){ 
+				button7.setText(cs);
+				button7.setBackground(dg);
+				button7.setForeground(dk);
+				}
+			if (i == 1) {
+				button8.setText(cs);
+				button8.setBackground(dg);
+				button8.setForeground(dk);
+			}
+			if (i == 2) {
+				button9.setText(cs);
+				button9.setBackground(dg);
+				button9.setForeground(dk);
+			}
+			if (i == 3) {
+				button10.setText(cs);
+				button10.setBackground(dg);
+				button10.setForeground(dk);
+			}
+			if (i == 4) {
+				button11.setText(cs);
+				button11.setBackground(dg);
+				button11.setForeground(dk);
+			}
+			if (i == 5) {
+				button12.setText(cs);
+				button12.setBackground(dg);
+				button12.setForeground(dk);
+			}
+			if (i == 6) {
+				button13.setText(cs);
+				button13.setBackground(dg);
+				button13.setForeground(dk);
+			}
+			if (i == 7) {
+				button14.setText(cs);
+				button14.setBackground(dg);
+				button14.setForeground(dk);
+			}
 
+	cs = "";
 	}
+						}
 
-	public void Up_Str_App() 
-	{
-		//А масив комірок filed5 заповнимо новими значеннями генератора випадкових чисел
-			for (int j=0; j<8; j++)
-		{
-			field5[j] = (int)(19*Math.random()); //генерує випадкове число = 0 до 19
-		}
-	}
-
-	
-	public void Save_Color() 
-	{
-		//Збереження кольорових атрибутів всіх комірок нижнього рядка 
-
-		savecolor[0] = button7.getBackground();
-		savecolor[1] = button8.getBackground();
-		savecolor[2] = button9.getBackground();
-		savecolor[3] = button10.getBackground();
-		savecolor[4] = button11.getBackground();
-		savecolor[5] = button12.getBackground();
-		savecolor[6] = button13.getBackground();
-		savecolor[7] = button14.getBackground();
-	
-	}
-	
-	public void Marker_Reset()
-	{ //Відновлення кольору маркера після зміщення комірок ігрового поля зверху-вниз
-		
-	if (markersave == 0) button7.setBackground(blue); //Відновити синій колір комірки
-	if (markersave == 1) button8.setBackground(blue);	
-	if (markersave == 2) button9.setBackground(blue);	
-	if (markersave == 3) button10.setBackground(blue);	
-	if (markersave == 4) button11.setBackground(blue);	
-	if (markersave == 5) button12.setBackground(blue);	
-	if (markersave == 6) button13.setBackground(blue);	
-	if (markersave == 7) button14.setBackground(blue);	
-	}
 	
 	public void Marker_Count()
 	{//Підрахунок очків при перестановці маркера
 	
 		if (n == 0) {
-			if (markersave == 0) et = field1[0]; //Маркер у лівій крайній комірці
-			if (markersave == 1) et = field1[1];
-			if (markersave == 2) et = field1[2];
-			if (markersave == 3) et = field1[3];
-			if (markersave == 4) et = field1[4];
-			if (markersave == 5) et = field1[5];
-			if (markersave == 6) et = field1[6];
-			if (markersave == 7) et = field1[7]; //Маркер у правій крайній комірці
+			if (markersave == 0) et = field[4][0]; //Маркер у лівій крайній комірці
+			if (markersave == 1) et = field[4][1];
+			if (markersave == 2) et = field[4][2];
+			if (markersave == 3) et = field[4][3];
+			if (markersave == 4) et = field[4][4];
+			if (markersave == 5) et = field[4][5];
+			if (markersave == 6) et = field[4][6];
+			if (markersave == 7) et = field[4][7]; //Маркер у правій крайній комірці
 			
 			//Написати рахунок
 			cs = "";
@@ -920,7 +570,7 @@ public class Form1 implements ActionListener{
 	{ //Підрахунок очків при зсуві рядків ігрового поля зверху вниз
 	n = 0;  //Тимчасово дозволити роботу процесу Set_Marker_Count
 	Marker_Count(); //процес підрахунку очків при встановленні маркера
-	Level_Count(); //Зсунути нумерацію рівнів Level
+	new Level_Count().levelCount(window); //Зсунути нумерацію рівнів Level
 	}
 
 	public void Print_Ind()
@@ -932,7 +582,8 @@ public class Form1 implements ActionListener{
 		if (IndLent == 5) button51.setVisible(false);
 		if (IndLent == 6) button50.setVisible(false);
 		if (IndLent == 7) button49.setVisible(false);
-
+//		if (IndLent == 7) mainTimer.setInterval(100);\ //Зменшити інтервал, щоб індикатор
+		                                           //відновлювався швидше
 		if (IndLent == 0) {
 			button55.setVisible(true); //намалювати всі елементи індикатора
 			button54.setVisible(true); //намалювати всі елементи індикатора
@@ -953,7 +604,7 @@ public class Form1 implements ActionListener{
 		  firstset = 0;       //Тимчасово дозволити малювання маркера
 		  button7.setBackground(savecolor[0]); //'Відновити колір фону комірки, де БУВ маркер
 		  //Копия button14_click(); 'Перемістити маркер (крайня права комірка!)
-		  		if (firstset == 0) Save_Color(); //Заповнити кольори комірок нижнього рядка
+		  		if (firstset == 0) new Save_Color().savecolor(window); //Заповнити кольори комірок нижнього рядка
 				if (firstset == 0) button14.setBackground(blue);
 				if (firstset == 0) markersave = 7; //Маркер у комірці, відповідній  savecolor(7)
 				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
@@ -967,7 +618,7 @@ public class Form1 implements ActionListener{
 		  firstset = 0;       //Тимчасово дозволити малювання маркера
 		  button8.setBackground(savecolor[1]); //'Відновити колір фона комірки, де БУВ маркер
 		  //Копия button7_click(); 'Перемістити маркер (крайня права комірка!)
-			if (firstset == 0) Save_Color(); //Запам'ятати кольори комірок нижнього рядка
+			if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
 			if (firstset == 0) button7.setBackground(blue);
 			if (firstset == 0) markersave = 0; //Маркер у комірці, відповідній  savecolor(0)
 			if (firstset == 0) firstset = 1; //Більше не опрацьовувати
@@ -981,7 +632,7 @@ public class Form1 implements ActionListener{
 		  firstset = 0;       //Тимчасово дозволити малювання маркера
 		  button9.setBackground(savecolor[2]); //'Відновити колір фона комірки, де БУВ маркер
 		  //Копия button8_click(); 'Перемістити маркер (крайня правая комірка!)
-			if (firstset == 0) Save_Color(); //Запам'ятати кольори комірок нижнього рядка
+			if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
 			if (firstset == 0) button8.setBackground(blue);
 			if (firstset == 0) markersave = 1; //Маркер в комірці, відповідній  savecolor(1)
 			if (firstset == 0) firstset = 1; //Більше не опрацьовувати
@@ -995,7 +646,7 @@ public class Form1 implements ActionListener{
 		  firstset = 0;       //Тимчасово дозволити малювання маркера
 		  button10.setBackground(savecolor[3]); //'Відновити колір фона комірки, де БУВ маркер
 		  //Копия button9_click(); 'Перемістити маркер (крайня правая комірка!)
-			if (firstset == 0) Save_Color(); //Запам'ятати кольори комірок нижнього рядка
+			if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
 			if (firstset == 0) button9.setBackground(blue);
 			if (firstset == 0) markersave = 2; //Маркер в комірці, відповідній  savecolor(2)
 			if (firstset == 0) firstset = 1; //Більше не опрацьовувати
@@ -1009,7 +660,7 @@ public class Form1 implements ActionListener{
 		  firstset = 0;       //Тимчасово дозволити малювання маркера
 		  button11.setBackground(savecolor[4]); //'Відновити колір фона комірки, де БУВ маркер
 		  //Копия button10_click(); 'Перемістити маркер (крайня правая комірка!)
-			if (firstset == 0) Save_Color(); //Запам'ятати кольори комірок нижнього рядка
+			if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
 			if (firstset == 0) button10.setBackground(blue);
 			if (firstset == 0) markersave = 3; //Маркер в комірці, відповідній  savecolor(3)
 			if (firstset == 0) firstset = 1; //Більше не опрацьовувати
@@ -1023,7 +674,7 @@ public class Form1 implements ActionListener{
 		  firstset = 0;       //Тимчасово дозволити малювання маркера
 		  button12.setBackground(savecolor[5]); //'Відновити колір фона комірки, де БУВ маркер
 		  //Копия button11_click(); 'Перемістити маркер (крайня правая комірка!)
-			if (firstset == 0) Save_Color(); //Запам'ятати кольори комірок нижнього рядка
+			if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
 			if (firstset == 0) button11.setBackground(blue);
 			if (firstset == 0) markersave = 4; //Маркер в комірці, відповідній  savecolor(4)
 			if (firstset == 0) firstset = 1; //Більше не опрацьовувати
@@ -1037,7 +688,7 @@ public class Form1 implements ActionListener{
 		  firstset = 0;       //Тимчасово дозволити малювання маркера
 		  button13.setBackground(savecolor[6]); //'Відновити колір фона комірки, де БУВ маркер
 		  //Копия button12_click(); 'Перемістити маркер (крайня правая комірка!)
-			if (firstset == 0) Save_Color(); //Запам'ятати кольори комірок нижнього рядка
+			if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
 			if (firstset == 0) button12.setBackground(blue);
 			if (firstset == 0) markersave = 5; //Маркер в комірці, відповідній  savecolor(5)
 			if (firstset == 0) firstset = 1; //Більше не опрацьовувати
@@ -1051,7 +702,7 @@ public class Form1 implements ActionListener{
 		  firstset = 0;       //Тимчасово дозволити малювання маркера
 		  button14.setBackground(savecolor[7]); //'Відновити колір фона комірки, де БУВ маркер
 		  //Копия button13_click(); 'Перемістити маркер (крайня правая комірка!)
-			if (firstset == 0) Save_Color(); //Запам'ятати кольори комірок нижнього рядка
+			if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
 			if (firstset == 0) button13.setBackground(blue);
 			if (firstset == 0) markersave = 6; //Маркер в комірці, відповідній  savecolor(6)
 			if (firstset == 0) firstset = 1; //Більше не опрацьовувати
@@ -1072,7 +723,7 @@ public class Form1 implements ActionListener{
 		  firstset = 0;       //Тимчасово дозволити малювання маркера
 		  button7.setBackground(savecolor[0]); //'Відновити колір фона комірки, де БУВ маркер
 		  //Копия button8_click(); 'Перемістити маркер праворуч
-		  		if (firstset == 0) Save_Color(); //Запам'ятати кольори комірок нижнього рядка
+		  		if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
 				if (firstset == 0) button8.setBackground(blue);
 				if (firstset == 0) markersave = 1; //Маркер в комірці, відповідній  savecolor(1)
 				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
@@ -1086,7 +737,7 @@ public class Form1 implements ActionListener{
 		  firstset = 0;       //Тимчасово дозволити малювання маркера
 		  button8.setBackground(savecolor[1]); //'Відновити колір фона комірки, де БУВ маркер
 		  //Копия button9_click(); 'Перемістити маркер праворуч
-		  		if (firstset == 0) Save_Color(); //Запам'ятати кольори комірок нижнього рядка
+		  		if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
 				if (firstset == 0) button9.setBackground(blue);
 				if (firstset == 0) markersave = 2; //Маркер в комірці, відповідній  savecolor(1)
 				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
@@ -1100,7 +751,7 @@ public class Form1 implements ActionListener{
 		  firstset = 0;       //Тимчасово дозволити малювання маркера
 		  button9.setBackground(savecolor[2]); //'Відновити колір фона комірки, де БУВ маркер
 		  //Копия button10_click(); 'Перемістити маркер праворуч
-		  		if (firstset == 0) Save_Color(); //Запам'ятати кольори комірок нижнього рядка
+		  		if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
 				if (firstset == 0) button10.setBackground(blue);
 				if (firstset == 0) markersave = 3; //Маркер в комірці, відповідній  savecolor(1)
 				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
@@ -1114,7 +765,7 @@ public class Form1 implements ActionListener{
 		  firstset = 0;       //Тимчасово дозволити малювання маркера
 		  button10.setBackground(savecolor[3]); //'Відновити колір фона комірки, де БУВ маркер
 		  //Копия button11_click(); 'Перемістити маркер праворуч
-		  		if (firstset == 0) Save_Color(); //Запам'ятати кольори комірок нижнього рядка
+		  		if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
 				if (firstset == 0) button11.setBackground(blue);
 				if (firstset == 0) markersave = 4; //Маркер в комірці, відповідній  savecolor(1)
 				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
@@ -1128,7 +779,7 @@ public class Form1 implements ActionListener{
 		  firstset = 0;       //Тимчасово дозволити малювання маркера
 		  button11.setBackground(savecolor[4]); //'Відновити колір фона комірки, де БУВ маркер
 		  //Копия button12_click(); 'Перемістити маркер праворуч
-		  		if (firstset == 0) Save_Color(); //Запам'ятати кольори комірок нижнього рядка
+		  		if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
 				if (firstset == 0) button12.setBackground(blue);
 				if (firstset == 0) markersave = 5; //Маркер в комірці, відповідній  savecolor(1)
 				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
@@ -1142,7 +793,7 @@ public class Form1 implements ActionListener{
 		  firstset = 0;       //Тимчасово дозволити малювання маркера
 		  button12.setBackground(savecolor[5]); //'Відновити колір фона комірки, де БУВ маркер
 		  //Копия button13_click(); 'Перемістити маркер праворуч
-		  		if (firstset == 0) Save_Color(); //Запам'ятати кольори комірок нижнього рядка
+		  		if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
 				if (firstset == 0) button13.setBackground(blue);
 				if (firstset == 0) markersave = 6; //Маркер в комірці, відповідній  savecolor(1)
 				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
@@ -1156,7 +807,7 @@ public class Form1 implements ActionListener{
 		  firstset = 0;       //Тимчасово дозволити малювання маркера
 		  button13.setBackground(savecolor[6]); //'Відновити колір фона комірки, де БУВ маркер
 		  //Копия button14_click(); 'Перемістити маркер праворуч
-		  		if (firstset == 0) Save_Color(); //Запам'ятати кольори комірок нижнього рядка
+		  		if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
 				if (firstset == 0) button14.setBackground(blue);
 				if (firstset == 0) markersave = 7; //Маркер в комірці, відповідній  savecolor(1)
 				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
@@ -1170,7 +821,7 @@ public class Form1 implements ActionListener{
 		  firstset = 0;       //Тимчасово дозволити малювання маркера
 		  button14.setBackground(savecolor[7]); //'Відновити колір фону комірки, де БУВ маркер
 		  //Копия button7_click(); 'Перемістити маркер праворуч
-		  		if (firstset == 0) Save_Color(); //Запам'ятати кольори комірок нижнього рядка
+		  		if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
 				if (firstset == 0) button7.setBackground(blue);
 				if (firstset == 0) markersave = 0; //Маркер в комірці, відповідній  savecolor(1)
 				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
@@ -1178,48 +829,19 @@ public class Form1 implements ActionListener{
 		  vt = markersave;
 		  markersave = 10;    //Значення 10 не відповідає ніякій комірці
 	  }
-
-		
 		
 	markersave = vt;
 	n = 0;
 	Marker_Count();
 	}
-
-	public void Level_Count()
-	{ //процес зсуву нумерації поточних ігрових рівнів
-	cs = "";
-	le[0] += 1;
-	cs = cs + le[0];
-	button6.setText(cs);
-
-	cs = "";
-	le[1] += 1;
-	cs = cs + le[1];
-	button5.setText(cs);
-
-	cs = "";
-	le[2] += 1;
-	cs = cs + le[2];
-	button4.setText(cs);
-
-	cs = "";
-	le[3] += 1;
-	cs = cs + le[3];
-	button3.setText(cs);
-
-	cs = "";
-	le[4] += 1;
-	cs = cs + le[4];
-	button2.setText(cs);
 	
-	}
-
+	
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
 		frmMYaremchukGame = new JFrame();
+		frmMYaremchukGame.getContentPane().setBackground(new Color(0, 51, 51));
 		frmMYaremchukGame.setBackground(Color.WHITE);
 		frmMYaremchukGame.setForeground(new Color(0, 51, 51));
 		frmMYaremchukGame.setFont(new Font("Times New Roman", Font.BOLD, 14));
@@ -1229,6 +851,7 @@ public class Form1 implements ActionListener{
 										//1355-ширина вікна; 765- висота вікна
 		frmMYaremchukGame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmMYaremchukGame.getContentPane().setLayout(null);
+//		frmMYaremchukGame.add(new Engine());
 		
 		button1 = new JButton("Level");
 		button1.setFont(new Font("Times New Roman", Font.BOLD, 60));
@@ -1289,7 +912,7 @@ public class Form1 implements ActionListener{
 		});
 		button7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (firstset == 0) Save_Color(); //Запам'ятати кольори комірок нижнього рядка
+				if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
 				if (firstset == 0) button7.setBackground(blue);
 				if (firstset == 0) markersave = 0; //Маркер у комірці, відповідній  savecolor(0)
 				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
@@ -1317,7 +940,7 @@ public class Form1 implements ActionListener{
 
 		button8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (firstset == 0) Save_Color(); //Запам'ятати кольори комірок нижнього рядка
+				if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
 				if (firstset == 0) button8.setBackground(blue);
 				if (firstset == 0) markersave = 1; //Маркер у комірці, відповідній  savecolor(1)
 				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
@@ -1346,7 +969,7 @@ public class Form1 implements ActionListener{
 
 		button9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (firstset == 0) Save_Color(); //Запам'ятати кольори комірок нижнього рядка
+				if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
 				if (firstset == 0) button9.setBackground(blue);
 				if (firstset == 0) markersave = 2; //Маркер у комірці, відповідній  savecolor(2)
 				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
@@ -1359,7 +982,7 @@ public class Form1 implements ActionListener{
 		button9.setBounds(470, 565, 135, 100);
 		frmMYaremchukGame.getContentPane().add(button9);
 		
-		button10 = new JButton(" P ");
+		button10 = new JButton(" +100 ");
 		button10.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -1374,7 +997,7 @@ public class Form1 implements ActionListener{
 
 		button10.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (firstset == 0) Save_Color(); //Запам'ятати кольори комірок нижнього рядка
+				if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
 				if (firstset == 0) button10.setBackground(blue);
 				if (firstset == 0) markersave = 3; //Маркер у комірці, відповідній  savecolor(3)
 				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
@@ -1402,7 +1025,7 @@ public class Form1 implements ActionListener{
 
 		button11.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (firstset == 0) Save_Color(); //Запам'ятати кольори комірок нижнього рядка
+				if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
 				if (firstset == 0) button11.setBackground(blue);
 				if (firstset == 0) markersave = 4; //Маркер у комірці, відповідній  savecolor(4)
 				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
@@ -1430,7 +1053,7 @@ public class Form1 implements ActionListener{
 
 		button12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (firstset == 0) Save_Color(); //Запам'ятати кольори комірок нижнього рядка
+				if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
 				if (firstset == 0) button12.setBackground(blue);
 				if (firstset == 0) markersave = 5; //Маркер у комірці, відповідній  savecolor(5)
 				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
@@ -1458,7 +1081,7 @@ public class Form1 implements ActionListener{
 
 		button13.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (firstset == 0) Save_Color(); //Запам'ятати кольори комірок нижнього рядка
+				if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
 				if (firstset == 0) button13.setBackground(blue);
 				if (firstset == 0) markersave = 6; //Маркер у комірці, відповідній  savecolor(6)
 				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
@@ -1486,7 +1109,7 @@ public class Form1 implements ActionListener{
 
 		button14.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (firstset == 0) Save_Color(); //Запам'ятати кольори комірок нижнього рядка
+				if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
 				if (firstset == 0) button14.setBackground(blue);
 				if (firstset == 0) markersave = 7; //Маркер у комірці, відповідній  savecolor(7)
 				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
@@ -1499,14 +1122,14 @@ public class Form1 implements ActionListener{
 		button14.setBounds(1195, 565, 135, 100);
 		frmMYaremchukGame.getContentPane().add(button14);
 		
-		button15 = new JButton("B");
+		button15 = new JButton("-200");
 		button15.setHorizontalAlignment(SwingConstants.CENTER);
 		button15.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button15.setBackground(Color.YELLOW);
 		button15.setBounds(180, 454, 135, 100);
 		frmMYaremchukGame.getContentPane().add(button15);
 		
-		button16 = new JButton("Z");
+		button16 = new JButton("Null");
 		button16.setForeground(Color.WHITE);
 		button16.setHorizontalAlignment(SwingConstants.CENTER);
 		button16.setFont(new Font("Times New Roman", Font.BOLD, 40));
@@ -1521,14 +1144,14 @@ public class Form1 implements ActionListener{
 		button17.setBounds(470, 454, 135, 100);
 		frmMYaremchukGame.getContentPane().add(button17);
 		
-		button18 = new JButton("B");
+		button18 = new JButton("-200");
 		button18.setHorizontalAlignment(SwingConstants.CENTER);
 		button18.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button18.setBackground(Color.YELLOW);
 		button18.setBounds(615, 454, 135, 100);
 		frmMYaremchukGame.getContentPane().add(button18);
 		
-		button19 = new JButton("T");
+		button19 = new JButton("+500");
 		button19.setHorizontalAlignment(SwingConstants.CENTER);
 		button19.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button19.setBackground(new Color(204, 255, 153));
@@ -1549,7 +1172,7 @@ public class Form1 implements ActionListener{
 		button21.setBounds(1050, 454, 135, 100);
 		frmMYaremchukGame.getContentPane().add(button21);
 		
-		button22 = new JButton("B");
+		button22 = new JButton("-200");
 		button22.setHorizontalAlignment(SwingConstants.CENTER);
 		button22.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button22.setBackground(Color.YELLOW);
@@ -1592,14 +1215,14 @@ public class Form1 implements ActionListener{
 		button27.setBounds(760, 343, 135, 100);
 		frmMYaremchukGame.getContentPane().add(button27);
 		
-		button28 = new JButton("B");
+		button28 = new JButton("-200");
 		button28.setHorizontalAlignment(SwingConstants.CENTER);
 		button28.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button28.setBackground(Color.YELLOW);
 		button28.setBounds(905, 343, 135, 100);
 		frmMYaremchukGame.getContentPane().add(button28);
 		
-		button29 = new JButton("Z");
+		button29 = new JButton("Null");
 		button29.setForeground(Color.WHITE);
 		button29.setHorizontalAlignment(SwingConstants.CENTER);
 		button29.setFont(new Font("Times New Roman", Font.BOLD, 40));
@@ -1607,14 +1230,14 @@ public class Form1 implements ActionListener{
 		button29.setBounds(1050, 343, 135, 100);
 		frmMYaremchukGame.getContentPane().add(button29);
 		
-		button30 = new JButton("T");
+		button30 = new JButton("+500");
 		button30.setHorizontalAlignment(SwingConstants.CENTER);
 		button30.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button30.setBackground(new Color(204, 255, 153));
 		button30.setBounds(1195, 343, 135, 100);
 		frmMYaremchukGame.getContentPane().add(button30);
 		
-		button31 = new JButton("T");
+		button31 = new JButton("+500");
 		button31.setHorizontalAlignment(SwingConstants.CENTER);
 		button31.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button31.setBackground(new Color(204, 255, 153));
@@ -1628,7 +1251,7 @@ public class Form1 implements ActionListener{
 		button32.setBounds(325, 232, 135, 100);
 		frmMYaremchukGame.getContentPane().add(button32);
 		
-		button33 = new JButton("B");
+		button33 = new JButton("-200");
 		button33.setHorizontalAlignment(SwingConstants.CENTER);
 		button33.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button33.setBackground(Color.YELLOW);
@@ -1642,7 +1265,7 @@ public class Form1 implements ActionListener{
 		button34.setBounds(615, 232, 135, 100);
 		frmMYaremchukGame.getContentPane().add(button34);
 		
-		button35 = new JButton("Z");
+		button35 = new JButton("Null");
 		button35.setForeground(Color.WHITE);
 		button35.setHorizontalAlignment(SwingConstants.CENTER);
 		button35.setFont(new Font("Times New Roman", Font.BOLD, 40));
@@ -1674,7 +1297,7 @@ public class Form1 implements ActionListener{
 		button39 = new JButton("+15");
 		button39.setHorizontalAlignment(SwingConstants.CENTER);
 		button39.setFont(new Font("Times New Roman", Font.BOLD, 40));
-		button39.setBackground(new Color(255, 250, 205));
+		button39.setBackground(new Color(153, 255, 153));
 		button39.setBounds(180, 121, 135, 100);
 		frmMYaremchukGame.getContentPane().add(button39);
 		
@@ -1685,7 +1308,7 @@ public class Form1 implements ActionListener{
 		button40.setBounds(325, 121, 135, 100);
 		frmMYaremchukGame.getContentPane().add(button40);
 		
-		button41 = new JButton("T");
+		button41 = new JButton("+500");
 		button41.setHorizontalAlignment(SwingConstants.CENTER);
 		button41.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button41.setBackground(new Color(50, 205, 50));
@@ -1706,14 +1329,14 @@ public class Form1 implements ActionListener{
 		button43.setBounds(760, 121, 135, 100);
 		frmMYaremchukGame.getContentPane().add(button43);
 		
-		button44 = new JButton("B");
+		button44 = new JButton("-200");
 		button44.setHorizontalAlignment(SwingConstants.CENTER);
 		button44.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button44.setBackground(Color.YELLOW);
 		button44.setBounds(905, 121, 135, 100);
 		frmMYaremchukGame.getContentPane().add(button44);
 		
-		button45 = new JButton("P");
+		button45 = new JButton("+100");
 		button45.setHorizontalAlignment(SwingConstants.CENTER);
 		button45.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button45.setBackground(new Color(204, 255, 255));
@@ -1733,11 +1356,11 @@ public class Form1 implements ActionListener{
 		button47.setBounds(200, 10, 719, 100);
 		frmMYaremchukGame.getContentPane().add(button47);
 		
-		button48 = new JButton(" 1000 ");
+		button48 = new JButton(" 0 ");
 		button48.setHorizontalAlignment(SwingConstants.CENTER);
 		button48.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button48.setBackground(new Color(255, 250, 205));
-		button48.setBounds(929, 10, 401, 100);
+		button48.setBounds(1040, 55, 180, 55);
 		frmMYaremchukGame.getContentPane().add(button48);
 		
 		button49 = new JButton("");
@@ -1789,12 +1412,24 @@ public class Form1 implements ActionListener{
 		button55.setBounds(1040, 676, 145, 20);
 		frmMYaremchukGame.getContentPane().add(button55);
 		
-		button56 = new JButton("");
-		button56.setHorizontalAlignment(SwingConstants.CENTER);
-		button56.setFont(new Font("Times New Roman", Font.BOLD, 40));
-		button56.setBackground(new Color(255, 255, 51));
-		button56.setBounds(1234, 667, 95, 48);
-		frmMYaremchukGame.getContentPane().add(button56);
+		JButton btnNewButton = new JButton("\u0420\u0430\u0445\u0443\u043D\u043E\u043A:");
+		btnNewButton.setBackground(Color.ORANGE);
+		btnNewButton.setForeground(Color.BLACK);
+		btnNewButton.setFont(new Font("Times New Roman", Font.BOLD, 45));
+		btnNewButton.setBounds(929, 10, 400, 48);
+		frmMYaremchukGame.getContentPane().add(btnNewButton);
+		
+		JButton btnNewButton_1 = new JButton(">>>");
+		btnNewButton_1.setFont(new Font("Times New Roman", Font.BOLD, 40));
+		btnNewButton_1.setBackground(Color.ORANGE);
+		btnNewButton_1.setBounds(929, 55, 115, 55);
+		frmMYaremchukGame.getContentPane().add(btnNewButton_1);
+		
+		JButton button = new JButton("<<<");
+		button.setFont(new Font("Times New Roman", Font.BOLD, 40));
+		button.setBackground(Color.ORANGE);
+		button.setBounds(1214, 55, 115, 55);
+		frmMYaremchukGame.getContentPane().add(button);
 		
 	}
 
@@ -1805,9 +1440,9 @@ public class Form1 implements ActionListener{
 
 			IndLent = IndLent + 1; //Погасити ще один елемент кольорового індикатора
 			if (IndLent == 9) mainTimer.restart(); //Відновити інтервал роботи індикатора
-			if (IndLent == 9) {		
-				Num_Move();
-			Marker_Reset(); //Відновити колір комірки с маркером
+			if (IndLent == 9) {	
+			new Num_Move().numMove(window);
+			new Save_Color().markerReset(window);; //Відновити колір комірки с маркером
 			Dn_Count(); //Підрахувати очки при зсуві зверху вниз
 			}
 			if (IndLent == 9) IndLent = 0; //Повний розмір індикатора
