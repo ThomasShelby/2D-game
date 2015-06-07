@@ -544,128 +544,7 @@ public class Form1 implements ActionListener{
 			
 		}
 	}
-	
-	public void Move_Point_Right()
-	{ //Перемщение маркера праворуч
 		
-	  if (markersave == 0) {  //Якщо крайня ліва комірка нижнього рядка
-		  markersave = 1;     //Перемістити праворуч (т.к. Значення > на 1)
-		  firstset = 0;       //Тимчасово дозволити малювання маркера
-		  button7.setBackground(savecolor[0]); //'Відновити колір фона комірки, де БУВ маркер
-		  //Копия button8_click(); 'Перемістити маркер праворуч
-		  		if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
-				if (firstset == 0) button8.setBackground(blue);
-				if (firstset == 0) markersave = 1; //Маркер в комірці, відповідній  savecolor(1)
-				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
-				new Count().markerCount(window); //Підрахувати очки при встановленні маркера
-		  vt = markersave;
-		  markersave = 10;    //Значення 10 не відповідає ніякій комірці
-	  }
-
-	  if (markersave == 1) {  //Якщо крайня ліва комірка нижнього рядка
-		  markersave = 2;     //Перемістити праворуч (т.к. Значення > на 1)
-		  firstset = 0;       //Тимчасово дозволити малювання маркера
-		  button8.setBackground(savecolor[1]); //'Відновити колір фона комірки, де БУВ маркер
-		  //Копия button9_click(); 'Перемістити маркер праворуч
-		  		if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
-				if (firstset == 0) button9.setBackground(blue);
-				if (firstset == 0) markersave = 2; //Маркер в комірці, відповідній  savecolor(1)
-				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
-				new Count().markerCount(window); //Підрахувати очки при встановленні маркера
-		  vt = markersave;
-		  markersave = 10;    //Значення 10 не відповідає ніякій комірці
-	  }
-
-	  if (markersave == 2) {  //Якщо крайня ліва комірка нижнього рядка
-		  markersave = 3;     //Перемістити праворуч (т.к. Значення > на 1)
-		  firstset = 0;       //Тимчасово дозволити малювання маркера
-		  button9.setBackground(savecolor[2]); //'Відновити колір фона комірки, де БУВ маркер
-		  //Копия button10_click(); 'Перемістити маркер праворуч
-		  		if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
-				if (firstset == 0) button10.setBackground(blue);
-				if (firstset == 0) markersave = 3; //Маркер в комірці, відповідній  savecolor(1)
-				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
-				new Count().markerCount(window); //Підрахувати очки при встановленні маркера
-		  vt = markersave;
-		  markersave = 10;    //Значення 10 не відповідає ніякій комірці
-	  }
-
-	  if (markersave == 3) {  //Якщо крайня ліва комірка нижнього рядка
-		  markersave = 4;     //Перемістити праворуч (т.к. Значення > на 1)
-		  firstset = 0;       //Тимчасово дозволити малювання маркера
-		  button10.setBackground(savecolor[3]); //'Відновити колір фона комірки, де БУВ маркер
-		  //Копия button11_click(); 'Перемістити маркер праворуч
-		  		if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
-				if (firstset == 0) button11.setBackground(blue);
-				if (firstset == 0) markersave = 4; //Маркер в комірці, відповідній  savecolor(1)
-				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
-				new Count().markerCount(window); //Підрахувати очки при встановленні маркера
-		  vt = markersave;
-		  markersave = 10;    //Значення 10 не відповідає ніякій комірці
-	  }
-
-	  if (markersave == 4) {  //Якщо крайня ліва комірка нижнього рядка
-		  markersave = 5;     //Перемістити праворуч (т.к. Значення > на 1)
-		  firstset = 0;       //Тимчасово дозволити малювання маркера
-		  button11.setBackground(savecolor[4]); //'Відновити колір фона комірки, де БУВ маркер
-		  //Копия button12_click(); 'Перемістити маркер праворуч
-		  		if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
-				if (firstset == 0) button12.setBackground(blue);
-				if (firstset == 0) markersave = 5; //Маркер в комірці, відповідній  savecolor(1)
-				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
-				new Count().markerCount(window); //Підрахувати очки при встановленні маркера
-		  vt = markersave;
-		  markersave = 10;    //Значення 10 не відповідає ніякій комірці
-	  }
-
-	  if (markersave == 5) {  //Якщо крайня ліва комірка нижнього рядка
-		  markersave = 6;     //Перемістити праворуч (т.к. Значення > на 1)
-		  firstset = 0;       //Тимчасово дозволити малювання маркера
-		  button12.setBackground(savecolor[5]); //'Відновити колір фона комірки, де БУВ маркер
-		  //Копия button13_click(); 'Перемістити маркер праворуч
-		  		if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
-				if (firstset == 0) button13.setBackground(blue);
-				if (firstset == 0) markersave = 6; //Маркер в комірці, відповідній  savecolor(1)
-				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
-				new Count().markerCount(window); //Підрахувати очки при встановленні маркера
-		  vt = markersave;
-		  markersave = 10;    //Значення 10 не відповідає ніякій комірці
-	  }
-
-	  if (markersave == 6) {  //Якщо крайня ліва комірка нижнього рядка
-		  markersave = 7;     //Перемістити праворуч (т.к. Значення > на 1)
-		  firstset = 0;       //Тимчасово дозволити малювання маркера
-		  button13.setBackground(savecolor[6]); //'Відновити колір фона комірки, де БУВ маркер
-		  //Копия button14_click(); 'Перемістити маркер праворуч
-		  		if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
-				if (firstset == 0) button14.setBackground(blue);
-				if (firstset == 0) markersave = 7; //Маркер в комірці, відповідній  savecolor(1)
-				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
-				new Count().markerCount(window); //Підрахувати очки при встановленні маркера
-		  vt = markersave;
-		  markersave = 10;    //Значення 10 не відповідає ніякій комірці
-	  }
-
-	  if (markersave == 7) {  //Якщо крайня ліва комірка нижнього рядка
-		  markersave = 0;     //Перемістити праворуч (т.к. Значення > на 1)
-		  firstset = 0;       //Тимчасово дозволити малювання маркера
-		  button14.setBackground(savecolor[7]); //'Відновити колір фону комірки, де БУВ маркер
-		  //Копия button7_click(); 'Перемістити маркер праворуч
-		  		if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
-				if (firstset == 0) button7.setBackground(blue);
-				if (firstset == 0) markersave = 0; //Маркер в комірці, відповідній  savecolor(1)
-				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
-				new Count().markerCount(window); //Підрахувати очки при встановленні маркера
-		  vt = markersave;
-		  markersave = 10;    //Значення 10 не відповідає ніякій комірці
-	  }
-		
-	markersave = vt;
-	n = 0;
-	new Count().markerCount(window);
-	}
-	
-	
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -732,7 +611,7 @@ public class Form1 implements ActionListener{
 			public void keyPressed(KeyEvent e) {
 			  	keyCode = e.getKeyCode();
 				if (keyCode == 37) new Move_Point_Left().movePointLeft(window); //Перемістити ліворуч
-				if (keyCode == 39) Move_Point_Right(); //Перемістити праворуч
+				if (keyCode == 39) new Move_Point_Right().movePointRight(window); //Перемістити праворуч
 				
 			  	cs="";
 				cs = cs + keyCode;
@@ -761,7 +640,7 @@ public class Form1 implements ActionListener{
 			public void keyPressed(KeyEvent e) {
 			  	keyCode = e.getKeyCode();
 				if (keyCode == 37) new Move_Point_Left().movePointLeft(window); //Перемістити ліворуч
-				if (keyCode == 39) Move_Point_Right(); //Перемістити праворуч
+				if (keyCode == 39) new Move_Point_Right().movePointRight(window); //Перемістити праворуч
 				
 			  	cs="";
 				cs = cs + keyCode;
@@ -790,7 +669,7 @@ public class Form1 implements ActionListener{
 			public void keyPressed(KeyEvent e) {
 			  	keyCode = e.getKeyCode();
 				if (keyCode == 37) new Move_Point_Left().movePointLeft(window); //Перемістити ліворуч
-				if (keyCode == 39) Move_Point_Right(); //Перемістити праворуч
+				if (keyCode == 39) new Move_Point_Right().movePointRight(window); //Перемістити праворуч
 				
 			  	cs="";
 				cs = cs + keyCode;
@@ -818,7 +697,7 @@ public class Form1 implements ActionListener{
 			public void keyPressed(KeyEvent e) {
 			  	keyCode = e.getKeyCode();
 				if (keyCode == 37) new Move_Point_Left().movePointLeft(window); //Перемістити ліворуч
-				if (keyCode == 39) Move_Point_Right(); //Перемістити праворуч
+				if (keyCode == 39) new Move_Point_Right().movePointRight(window); //Перемістити праворуч
 				
 			  	cs="";
 				cs = cs + keyCode;
@@ -846,7 +725,7 @@ public class Form1 implements ActionListener{
 			public void keyPressed(KeyEvent e) {
 			  	keyCode = e.getKeyCode();
 				if (keyCode == 37) new Move_Point_Left().movePointLeft(window); //Перемістити ліворуч
-				if (keyCode == 39) Move_Point_Right(); //Перемістити праворуч
+				if (keyCode == 39) new Move_Point_Right().movePointRight(window); //Перемістити праворуч
 				
 			  	cs="";
 				cs = cs + keyCode;
@@ -874,7 +753,7 @@ public class Form1 implements ActionListener{
 			public void keyPressed(KeyEvent e) {
 			  	keyCode = e.getKeyCode();
 				if (keyCode == 37) new Move_Point_Left().movePointLeft(window); //Перемістити ліворуч
-				if (keyCode == 39) Move_Point_Right(); //Перемістити праворуч
+				if (keyCode == 39) new Move_Point_Right().movePointRight(window); //Перемістити праворуч
 				
 			  	cs="";
 				cs = cs + keyCode;
@@ -902,7 +781,7 @@ public class Form1 implements ActionListener{
 			public void keyPressed(KeyEvent e) {
 			  	keyCode = e.getKeyCode();
 				if (keyCode == 37) new Move_Point_Left().movePointLeft(window); //Перемістити ліворуч
-				if (keyCode == 39) Move_Point_Right(); //Перемістити праворуч
+				if (keyCode == 39) new Move_Point_Right().movePointRight(window); //Перемістити праворуч
 				
 			  	cs="";
 				cs = cs + keyCode;
@@ -930,7 +809,7 @@ public class Form1 implements ActionListener{
 			public void keyPressed(KeyEvent e) {
 			  	keyCode = e.getKeyCode();
 				if (keyCode == 37) new Move_Point_Left().movePointLeft(window); //Перемістити ліворуч
-				if (keyCode == 39) Move_Point_Right(); //Перемістити праворуч
+				if (keyCode == 39) new Move_Point_Right().movePointRight(window); //Перемістити праворуч
 				
 			  	cs="";
 				cs = cs + keyCode;
