@@ -115,7 +115,7 @@ public class Form1 implements ActionListener{
     public int firstset; //Триггер - поставлений маркер = 1, якщо = 0, то не поставлений
     public int markersave; //Показує у якій комірці зараз стоїть маркер
 	
-	public int et; //у цю змінну будуть записані результати перерахунку значень масиву field1[]
+	public int et; //у цю змінну будуть записані результати перерахунку значень масиву field[][]
 
 	public int i56;
 	public String c56 = "";
@@ -291,7 +291,6 @@ public class Form1 implements ActionListener{
 
 	public void Field_Fill() 
 	{ 
-		int r;
 						for (int i=0; i<8; i++)
 		{
 							colorChars(0,i); 
@@ -1141,8 +1140,6 @@ public class Form1 implements ActionListener{
 		frmMYaremchukGame.getContentPane().add(button);
 		
 	}
-
-
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
