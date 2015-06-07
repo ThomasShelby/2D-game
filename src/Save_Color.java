@@ -1,6 +1,6 @@
 public class Save_Color{
 
-	public void savecolor(Form1 fr) 
+	public void saveColor(Form1 fr) 
 	{
 		//Збереження кольорових атрибутів всіх комірок нижнього рядка 
 

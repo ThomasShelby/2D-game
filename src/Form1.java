@@ -522,57 +522,6 @@ public class Form1 implements ActionListener{
 	}
 						}
 
-	
-	public void Marker_Count()
-	{//Підрахунок очків при перестановці маркера
-	
-		if (n == 0) {
-			if (markersave == 0) et = field[4][0]; //Маркер у лівій крайній комірці
-			if (markersave == 1) et = field[4][1];
-			if (markersave == 2) et = field[4][2];
-			if (markersave == 3) et = field[4][3];
-			if (markersave == 4) et = field[4][4];
-			if (markersave == 5) et = field[4][5];
-			if (markersave == 6) et = field[4][6];
-			if (markersave == 7) et = field[4][7]; //Маркер у правій крайній комірці
-			
-			//Написати рахунок
-			cs = "";
-			if (et == 0) m = m + 1;
-			if (et == 1) m = m - 1;
-			if (et == 2) m = m + 5;
-			if (et == 3) m = m - 5;
-			if (et == 4) m = m + 10;
-			if (et == 5) m = m - 10;
-			if (et == 6) m = m + 15;
-			if (et == 7) m = m - 15;
-			if (et == 8) m = m + 25;
-			if (et == 9) m = m + 500;
-			if (et == 10) m = m + 100;
-			if (et == 11) m = m - 200;
-			if (et == 12) m = 0;
-			if (et == 13) m = 0;
-			if (et == 14) System.exit(0);
-			if (et == 15) m = m - 10;
-			if (et == 16) m = m - 5;
-			if (et == 17) m = m - 1;
-			if (et == 18) m = m + 1;
-			if (et == 19) m = m + 50;
-			if (et == 20) m = m - 25;
-			cs = cs + m;
-			button48.setText(cs);
-			n = 1; //Більше не опрацьовувати
-		}
-		mainTimer.start(); //Дозволити роботу таймера та лінійного індикатора
-	}
-	
-	public void Dn_Count()
-	{ //Підрахунок очків при зсуві рядків ігрового поля зверху вниз
-	n = 0;  //Тимчасово дозволити роботу процесу Set_Marker_Count
-	Marker_Count(); //процес підрахунку очків при встановленні маркера
-	new Level_Count().levelCount(window); //Зсунути нумерацію рівнів Level
-	}
-
 	public void Print_Ind()
 	{ //намалювати кольоровий лінійний індикатор
 		if (IndLent == 1) button55.setVisible(false);
@@ -604,11 +553,11 @@ public class Form1 implements ActionListener{
 		  firstset = 0;       //Тимчасово дозволити малювання маркера
 		  button7.setBackground(savecolor[0]); //'Відновити колір фону комірки, де БУВ маркер
 		  //Копия button14_click(); 'Перемістити маркер (крайня права комірка!)
-		  		if (firstset == 0) new Save_Color().savecolor(window); //Заповнити кольори комірок нижнього рядка
+		  		if (firstset == 0) new Save_Color().saveColor(window); //Заповнити кольори комірок нижнього рядка
 				if (firstset == 0) button14.setBackground(blue);
 				if (firstset == 0) markersave = 7; //Маркер у комірці, відповідній  savecolor(7)
 				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
-				Marker_Count(); //Підрахувати очки при встановленні маркера
+				new Count().markerCount(window); //Підрахувати очки при встановленні маркера
 		  vt = markersave;
 		  markersave = 10;    //Значення 10 не відповідає ніякій комірці
 	  }
@@ -618,11 +567,11 @@ public class Form1 implements ActionListener{
 		  firstset = 0;       //Тимчасово дозволити малювання маркера
 		  button8.setBackground(savecolor[1]); //'Відновити колір фона комірки, де БУВ маркер
 		  //Копия button7_click(); 'Перемістити маркер (крайня права комірка!)
-			if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
+			if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
 			if (firstset == 0) button7.setBackground(blue);
 			if (firstset == 0) markersave = 0; //Маркер у комірці, відповідній  savecolor(0)
 			if (firstset == 0) firstset = 1; //Більше не опрацьовувати
-			Marker_Count(); //Підрахувати очки при встановленні маркера
+			new Count().markerCount(window); //Підрахувати очки при встановленні маркера
 		  vt = markersave;
 		  markersave = 10;    //Значення 10 не відповідає ніякій комірці
 	  }
@@ -632,11 +581,11 @@ public class Form1 implements ActionListener{
 		  firstset = 0;       //Тимчасово дозволити малювання маркера
 		  button9.setBackground(savecolor[2]); //'Відновити колір фона комірки, де БУВ маркер
 		  //Копия button8_click(); 'Перемістити маркер (крайня правая комірка!)
-			if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
+			if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
 			if (firstset == 0) button8.setBackground(blue);
 			if (firstset == 0) markersave = 1; //Маркер в комірці, відповідній  savecolor(1)
 			if (firstset == 0) firstset = 1; //Більше не опрацьовувати
-			Marker_Count(); //Підрахувати очки при встановленні маркера
+			new Count().markerCount(window); //Підрахувати очки при встановленні маркера
 		  vt = markersave;
 		  markersave = 10;    //Значення 10 не відповідає ніякій комірці
 	  }
@@ -646,11 +595,11 @@ public class Form1 implements ActionListener{
 		  firstset = 0;       //Тимчасово дозволити малювання маркера
 		  button10.setBackground(savecolor[3]); //'Відновити колір фона комірки, де БУВ маркер
 		  //Копия button9_click(); 'Перемістити маркер (крайня правая комірка!)
-			if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
+			if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
 			if (firstset == 0) button9.setBackground(blue);
 			if (firstset == 0) markersave = 2; //Маркер в комірці, відповідній  savecolor(2)
 			if (firstset == 0) firstset = 1; //Більше не опрацьовувати
-			Marker_Count(); //Підрахувати очки при встановленні маркера
+			new Count().markerCount(window); //Підрахувати очки при встановленні маркера
 		  vt = markersave;
 		  markersave = 10;    //Значення 10 не відповідає ніякій комірці
 	  }
@@ -660,11 +609,11 @@ public class Form1 implements ActionListener{
 		  firstset = 0;       //Тимчасово дозволити малювання маркера
 		  button11.setBackground(savecolor[4]); //'Відновити колір фона комірки, де БУВ маркер
 		  //Копия button10_click(); 'Перемістити маркер (крайня правая комірка!)
-			if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
+			if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
 			if (firstset == 0) button10.setBackground(blue);
 			if (firstset == 0) markersave = 3; //Маркер в комірці, відповідній  savecolor(3)
 			if (firstset == 0) firstset = 1; //Більше не опрацьовувати
-			Marker_Count(); //Підрахувати очки при встановленні маркера
+			new Count().markerCount(window); //Підрахувати очки при встановленні маркера
 		  vt = markersave;
 		  markersave = 10;    //Значення 10 не відповідає ніякій комірці
 	  }
@@ -674,11 +623,11 @@ public class Form1 implements ActionListener{
 		  firstset = 0;       //Тимчасово дозволити малювання маркера
 		  button12.setBackground(savecolor[5]); //'Відновити колір фона комірки, де БУВ маркер
 		  //Копия button11_click(); 'Перемістити маркер (крайня правая комірка!)
-			if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
+			if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
 			if (firstset == 0) button11.setBackground(blue);
 			if (firstset == 0) markersave = 4; //Маркер в комірці, відповідній  savecolor(4)
 			if (firstset == 0) firstset = 1; //Більше не опрацьовувати
-			Marker_Count(); //Підрахувати очки при встановленні маркера
+			new Count().markerCount(window); //Підрахувати очки при встановленні маркера
 		  vt = markersave;
 		  markersave = 10;    //Значення 10 не відповідає ніякій комірці
 	  }
@@ -688,11 +637,11 @@ public class Form1 implements ActionListener{
 		  firstset = 0;       //Тимчасово дозволити малювання маркера
 		  button13.setBackground(savecolor[6]); //'Відновити колір фона комірки, де БУВ маркер
 		  //Копия button12_click(); 'Перемістити маркер (крайня правая комірка!)
-			if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
+			if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
 			if (firstset == 0) button12.setBackground(blue);
 			if (firstset == 0) markersave = 5; //Маркер в комірці, відповідній  savecolor(5)
 			if (firstset == 0) firstset = 1; //Більше не опрацьовувати
-			Marker_Count(); //Підрахувати очки при встановленні маркера
+			new Count().markerCount(window); //Підрахувати очки при встановленні маркера
 		  vt = markersave;
 		  markersave = 10;    //Значення 10 не відповідає ніякій комірці
 	  }
@@ -702,17 +651,17 @@ public class Form1 implements ActionListener{
 		  firstset = 0;       //Тимчасово дозволити малювання маркера
 		  button14.setBackground(savecolor[7]); //'Відновити колір фона комірки, де БУВ маркер
 		  //Копия button13_click(); 'Перемістити маркер (крайня правая комірка!)
-			if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
+			if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
 			if (firstset == 0) button13.setBackground(blue);
 			if (firstset == 0) markersave = 6; //Маркер в комірці, відповідній  savecolor(6)
 			if (firstset == 0) firstset = 1; //Більше не опрацьовувати
-			Marker_Count(); //Підрахувати очки при встановленні маркера
+			new Count().markerCount(window); //Підрахувати очки при встановленні маркера
 		  vt = markersave;
 		  markersave = 10;    //Значення 10 не відповідає ніякій комірці
 	  }
 	markersave = vt;
 	n = 0;
-	Marker_Count();
+	new Count().markerCount(window);
  }
 
 	public void Move_Point_Right()
@@ -723,11 +672,11 @@ public class Form1 implements ActionListener{
 		  firstset = 0;       //Тимчасово дозволити малювання маркера
 		  button7.setBackground(savecolor[0]); //'Відновити колір фона комірки, де БУВ маркер
 		  //Копия button8_click(); 'Перемістити маркер праворуч
-		  		if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
+		  		if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
 				if (firstset == 0) button8.setBackground(blue);
 				if (firstset == 0) markersave = 1; //Маркер в комірці, відповідній  savecolor(1)
 				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
-				Marker_Count(); //Підрахувати очки при встановленні маркера
+				new Count().markerCount(window); //Підрахувати очки при встановленні маркера
 		  vt = markersave;
 		  markersave = 10;    //Значення 10 не відповідає ніякій комірці
 	  }
@@ -737,11 +686,11 @@ public class Form1 implements ActionListener{
 		  firstset = 0;       //Тимчасово дозволити малювання маркера
 		  button8.setBackground(savecolor[1]); //'Відновити колір фона комірки, де БУВ маркер
 		  //Копия button9_click(); 'Перемістити маркер праворуч
-		  		if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
+		  		if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
 				if (firstset == 0) button9.setBackground(blue);
 				if (firstset == 0) markersave = 2; //Маркер в комірці, відповідній  savecolor(1)
 				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
-				Marker_Count(); //Підрахувати очки при встановленні маркера
+				new Count().markerCount(window); //Підрахувати очки при встановленні маркера
 		  vt = markersave;
 		  markersave = 10;    //Значення 10 не відповідає ніякій комірці
 	  }
@@ -751,11 +700,11 @@ public class Form1 implements ActionListener{
 		  firstset = 0;       //Тимчасово дозволити малювання маркера
 		  button9.setBackground(savecolor[2]); //'Відновити колір фона комірки, де БУВ маркер
 		  //Копия button10_click(); 'Перемістити маркер праворуч
-		  		if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
+		  		if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
 				if (firstset == 0) button10.setBackground(blue);
 				if (firstset == 0) markersave = 3; //Маркер в комірці, відповідній  savecolor(1)
 				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
-				Marker_Count(); //Підрахувати очки при встановленні маркера
+				new Count().markerCount(window); //Підрахувати очки при встановленні маркера
 		  vt = markersave;
 		  markersave = 10;    //Значення 10 не відповідає ніякій комірці
 	  }
@@ -765,11 +714,11 @@ public class Form1 implements ActionListener{
 		  firstset = 0;       //Тимчасово дозволити малювання маркера
 		  button10.setBackground(savecolor[3]); //'Відновити колір фона комірки, де БУВ маркер
 		  //Копия button11_click(); 'Перемістити маркер праворуч
-		  		if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
+		  		if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
 				if (firstset == 0) button11.setBackground(blue);
 				if (firstset == 0) markersave = 4; //Маркер в комірці, відповідній  savecolor(1)
 				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
-				Marker_Count(); //Підрахувати очки при встановленні маркера
+				new Count().markerCount(window); //Підрахувати очки при встановленні маркера
 		  vt = markersave;
 		  markersave = 10;    //Значення 10 не відповідає ніякій комірці
 	  }
@@ -779,11 +728,11 @@ public class Form1 implements ActionListener{
 		  firstset = 0;       //Тимчасово дозволити малювання маркера
 		  button11.setBackground(savecolor[4]); //'Відновити колір фона комірки, де БУВ маркер
 		  //Копия button12_click(); 'Перемістити маркер праворуч
-		  		if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
+		  		if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
 				if (firstset == 0) button12.setBackground(blue);
 				if (firstset == 0) markersave = 5; //Маркер в комірці, відповідній  savecolor(1)
 				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
-				Marker_Count(); //Підрахувати очки при встановленні маркера
+				new Count().markerCount(window); //Підрахувати очки при встановленні маркера
 		  vt = markersave;
 		  markersave = 10;    //Значення 10 не відповідає ніякій комірці
 	  }
@@ -793,11 +742,11 @@ public class Form1 implements ActionListener{
 		  firstset = 0;       //Тимчасово дозволити малювання маркера
 		  button12.setBackground(savecolor[5]); //'Відновити колір фона комірки, де БУВ маркер
 		  //Копия button13_click(); 'Перемістити маркер праворуч
-		  		if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
+		  		if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
 				if (firstset == 0) button13.setBackground(blue);
 				if (firstset == 0) markersave = 6; //Маркер в комірці, відповідній  savecolor(1)
 				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
-				Marker_Count(); //Підрахувати очки при встановленні маркера
+				new Count().markerCount(window); //Підрахувати очки при встановленні маркера
 		  vt = markersave;
 		  markersave = 10;    //Значення 10 не відповідає ніякій комірці
 	  }
@@ -807,11 +756,11 @@ public class Form1 implements ActionListener{
 		  firstset = 0;       //Тимчасово дозволити малювання маркера
 		  button13.setBackground(savecolor[6]); //'Відновити колір фона комірки, де БУВ маркер
 		  //Копия button14_click(); 'Перемістити маркер праворуч
-		  		if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
+		  		if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
 				if (firstset == 0) button14.setBackground(blue);
 				if (firstset == 0) markersave = 7; //Маркер в комірці, відповідній  savecolor(1)
 				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
-				Marker_Count(); //Підрахувати очки при встановленні маркера
+				new Count().markerCount(window); //Підрахувати очки при встановленні маркера
 		  vt = markersave;
 		  markersave = 10;    //Значення 10 не відповідає ніякій комірці
 	  }
@@ -821,18 +770,18 @@ public class Form1 implements ActionListener{
 		  firstset = 0;       //Тимчасово дозволити малювання маркера
 		  button14.setBackground(savecolor[7]); //'Відновити колір фону комірки, де БУВ маркер
 		  //Копия button7_click(); 'Перемістити маркер праворуч
-		  		if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
+		  		if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
 				if (firstset == 0) button7.setBackground(blue);
 				if (firstset == 0) markersave = 0; //Маркер в комірці, відповідній  savecolor(1)
 				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
-				Marker_Count(); //Підрахувати очки при встановленні маркера
+				new Count().markerCount(window); //Підрахувати очки при встановленні маркера
 		  vt = markersave;
 		  markersave = 10;    //Значення 10 не відповідає ніякій комірці
 	  }
 		
 	markersave = vt;
 	n = 0;
-	Marker_Count();
+	new Count().markerCount(window);
 	}
 	
 	
@@ -912,11 +861,11 @@ public class Form1 implements ActionListener{
 		});
 		button7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
+				if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
 				if (firstset == 0) button7.setBackground(blue);
 				if (firstset == 0) markersave = 0; //Маркер у комірці, відповідній  savecolor(0)
 				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
-				Marker_Count(); //Підрахувати очки при встановленні маркера
+				new Count().markerCount(window); //Підрахувати очки при встановленні маркера
 			}
 		});
 		button7.setHorizontalAlignment(SwingConstants.CENTER);
@@ -940,11 +889,11 @@ public class Form1 implements ActionListener{
 
 		button8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
+				if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
 				if (firstset == 0) button8.setBackground(blue);
 				if (firstset == 0) markersave = 1; //Маркер у комірці, відповідній  savecolor(1)
 				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
-				Marker_Count(); //Підрахувати очки при встановленні маркера
+				new Count().markerCount(window); //Підрахувати очки при встановленні маркера
 			
 			}
 		});
@@ -969,11 +918,11 @@ public class Form1 implements ActionListener{
 
 		button9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
+				if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
 				if (firstset == 0) button9.setBackground(blue);
 				if (firstset == 0) markersave = 2; //Маркер у комірці, відповідній  savecolor(2)
 				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
-				Marker_Count(); //Підрахувати очки при встановленні маркера
+				new Count().markerCount(window); //Підрахувати очки при встановленні маркера
 			}
 		});
 		button9.setHorizontalAlignment(SwingConstants.CENTER);
@@ -997,11 +946,11 @@ public class Form1 implements ActionListener{
 
 		button10.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
+				if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
 				if (firstset == 0) button10.setBackground(blue);
 				if (firstset == 0) markersave = 3; //Маркер у комірці, відповідній  savecolor(3)
 				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
-				Marker_Count(); //Підрахувати очки при встановленні маркера
+				new Count().markerCount(window); //Підрахувати очки при встановленні маркера
 			}
 		});
 		button10.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1025,11 +974,11 @@ public class Form1 implements ActionListener{
 
 		button11.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
+				if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
 				if (firstset == 0) button11.setBackground(blue);
 				if (firstset == 0) markersave = 4; //Маркер у комірці, відповідній  savecolor(4)
 				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
-				Marker_Count(); //Підрахувати очки при встановленні маркера
+				new Count().markerCount(window); //Підрахувати очки при встановленні маркера
 			}
 		});
 		button11.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1053,11 +1002,11 @@ public class Form1 implements ActionListener{
 
 		button12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
+				if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
 				if (firstset == 0) button12.setBackground(blue);
 				if (firstset == 0) markersave = 5; //Маркер у комірці, відповідній  savecolor(5)
 				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
-				Marker_Count(); //Підрахувати очки при встановленні маркера
+				new Count().markerCount(window); //Підрахувати очки при встановленні маркера
 			}
 		});
 		button12.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1081,11 +1030,11 @@ public class Form1 implements ActionListener{
 
 		button13.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
+				if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
 				if (firstset == 0) button13.setBackground(blue);
 				if (firstset == 0) markersave = 6; //Маркер у комірці, відповідній  savecolor(6)
 				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
-				Marker_Count(); //Підрахувати очки при встановленні маркера
+				new Count().markerCount(window); //Підрахувати очки при встановленні маркера
 			}
 		});
 		button13.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1109,11 +1058,11 @@ public class Form1 implements ActionListener{
 
 		button14.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (firstset == 0) new Save_Color().savecolor(window); //Запам'ятати кольори комірок нижнього рядка
+				if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
 				if (firstset == 0) button14.setBackground(blue);
 				if (firstset == 0) markersave = 7; //Маркер у комірці, відповідній  savecolor(7)
 				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
-				Marker_Count(); //Підрахувати очки при встановленні маркера
+				new Count().markerCount(window); //Підрахувати очки при встановленні маркера
 			}
 		});
 		button14.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1443,7 +1392,7 @@ public class Form1 implements ActionListener{
 			if (IndLent == 9) {	
 			new Num_Move().numMove(window);
 			new Save_Color().markerReset(window);; //Відновити колір комірки с маркером
-			Dn_Count(); //Підрахувати очки при зсуві зверху вниз
+			new Count().dnCount(window); //Підрахувати очки при зсуві зверху вниз
 			}
 			if (IndLent == 9) IndLent = 0; //Повний розмір індикатора
 			Print_Ind();   //Намалюємо індикатор
