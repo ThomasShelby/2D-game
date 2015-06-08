@@ -13,7 +13,8 @@ public class MyConnect {
      protected Connection conn = null;
      protected Statement stat = null;
      protected ResultSet res = null;
-
+     ArrayList<String> list1 = new ArrayList<String>();
+     ArrayList<String> list2 = new ArrayList<String>();
      
      public int checkConnStat() {
          if(conn == null || stat == null )
@@ -74,19 +75,27 @@ public class MyConnect {
      public ArrayList<String> get() {
     	 ArrayList<String> list = new ArrayList<String>();
     	  try {
-    	         res = stat.executeQuery("select  name,score,time from score order by score ;");
+    	         res = stat.executeQuery("select  name from score  ;");
     	            while(res.next())
-    	                list.add(" "+res.getString(1)+"____	"+"  "+res.getString(2)+"	 ____	"+" "+res.getString(3)+" ");
-    	             } catch (SQLException ex) {
+    	            	list.add(res.getString(1));
+    	            res = stat.executeQuery("select  score from score  ;");
+    	            while(res.next())
+    	            	list1.add(res.getString(1));
+    	            res = stat.executeQuery("select  time from score  ;");
+    	            while(res.next())
+    	            	list2.add(res.getString(1));
+    	  			} catch (SQLException ex) {
     	            System.out.println(ex.toString());
     	          }
     	 return list;
      }
 
      public Object [][] arrayToObject(ArrayList<String> list) {
-         Object [][] o = new Object[list.size()][1];
+         Object [][] o = new Object[list.size()][3];
          for(int i = 0;i < o.length;i++) {
              o[i][0] = (Object) list.get(i);
+             o[i][1] = (Object) list1.get(i);
+             o[i][2] = (Object) list2.get(i);
          }
          return o;
      }

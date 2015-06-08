@@ -108,7 +108,6 @@ public class Form1 implements ActionListener{
     Move_Point_Right mpr = new Move_Point_Right();
     
    Timer mainTimer = new Timer(time, this);
-//   Timer bigTimer = new Timer(time, this);
 	
 	public char c;
 	
@@ -141,7 +140,6 @@ public class Form1 implements ActionListener{
 	public int i56;
 	public String c56 = "";
 	public int IndLent; //Визначає довжину кольорового лінійного індикатора
-//	public static JFrame frm;
 	
 	/**
 	 * Launch the application.
@@ -172,7 +170,6 @@ public class Form1 implements ActionListener{
 							window.frmMYaremchukGame.setVisible(true);
 							start.frame.setVisible(false);
 							Level_Count.increaseSpeed=false;
-//							Count.isEnd=false;
 						}
 					});
 					

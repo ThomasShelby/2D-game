@@ -45,7 +45,7 @@ public class ResultForm {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 565, 379);
+		frame.setBounds(400, 150, 565, 379);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
