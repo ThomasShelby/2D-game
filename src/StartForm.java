@@ -1,17 +1,26 @@
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+
 import java.awt.Color;
+
 import javax.swing.JButton;
+
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 public class StartForm {
 
-	private JFrame frame;
-	Form1 fr=new Form1();
+	public JFrame frame;
+	Form1 fr;
+	static StartForm window;
+	
+	JButton button_1 ;
+	JButton btnNewButton ;
 
 	/**
 	 * Launch the application.
@@ -20,8 +29,9 @@ public class StartForm {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					StartForm window = new StartForm();
+					window = new StartForm();
 					window.frame.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -44,7 +54,7 @@ public class StartForm {
 		frame.getContentPane().setBackground(new Color(0, 128, 128));
 		frame.getContentPane().setLayout(null);
 		
-		JButton btnNewButton = new JButton("M. Yaremchuk game");
+		btnNewButton = new JButton("M. Yaremchuk game");
 		btnNewButton.setForeground(new Color(152, 251, 152));
 		btnNewButton.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 99));
 		btnNewButton.setBackground(new Color(0, 128, 128));
@@ -57,14 +67,9 @@ public class StartForm {
 		button.setBounds(108, 178, 463, 88);
 		frame.getContentPane().add(button);
 		
-		JButton button_1 = new JButton("\u0417\u0431\u0456\u043B\u044C\u0448\u0435\u043D\u043D\u044F \u0448\u0432\u0438\u0434\u043A\u043E\u0441\u0442\u0456");
-		button_1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				
-				
-			}
-		});
+		button_1 = new JButton("\u0417\u0431\u0456\u043B\u044C\u0448\u0435\u043D\u043D\u044F \u0448\u0432\u0438\u0434\u043A\u043E\u0441\u0442\u0456");
+		
+		
 		button_1.setFont(new Font("Times New Roman", Font.BOLD, 45));
 		button_1.setForeground(new Color(248, 248, 255));
 		button_1.setBackground(new Color(0, 0, 205));

@@ -18,7 +18,7 @@ import javax.swing.Timer;
  */
 public class Form1 implements ActionListener{
 
-	private JFrame frmMYaremchukGame;
+	JFrame frmMYaremchukGame;
 	JButton button1 = new JButton();
 	JButton button2 = new JButton();
 	JButton button3 = new JButton();
@@ -138,7 +138,7 @@ public class Form1 implements ActionListener{
 	public int i56;
 	public String c56 = "";
 	public int IndLent; //Визначає довжину кольорового лінійного індикатора
-	
+	public static JFrame frm;
 	
 	/**
 	 * Launch the application.
@@ -147,8 +147,16 @@ public class Form1 implements ActionListener{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					window = new Form1();
-					window.frmMYaremchukGame.setVisible(true);
+					StartForm start = new StartForm();
+					start.frame.setVisible(true);
+					start.button_1.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							window = new Form1();
+							window.frmMYaremchukGame.setVisible(true);
+							start.frame.setVisible(false);
+						}
+					}); 
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
