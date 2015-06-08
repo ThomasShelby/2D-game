@@ -1,5 +1,7 @@
 public class Level_Count {
 	
+	private boolean increaseSpeed=true;
+	
 	public void levelCount(Form1 pr)
 	{ //процес зсуву нумерації поточних ігрових рівнів
 	pr.cs = "";
@@ -27,11 +29,19 @@ public class Level_Count {
 	pr.cs = pr.cs + pr.le[4];
 	pr.button2.setText(pr.cs);
 	
-/*	if(pr.time>0){
-	pr.mainTimer.setDelay(pr.time-=10);
-	}else{
-	pr.time=0;
+	
+	if(increaseSpeed){
+		speed(pr);
 	}
-	System.out.println(pr.time);*/
+	
+	System.out.println(pr.time);
+	}
+	
+	public void speed(Form1 pr){
+		if(pr.time>0){
+			pr.mainTimer.setDelay(pr.time-=10);
+			}else{
+			pr.time=0;
+			}
 	}
 }

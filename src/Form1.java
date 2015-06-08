@@ -104,8 +104,11 @@ public class Form1 implements ActionListener{
     public int time=200;
     public int a=0;
     
-    Timer mainTimer = new Timer(time, this);
-    Timer bigTimer = new Timer(time, this);
+    Move_Point_Left mpl = new Move_Point_Left();
+    Move_Point_Right mpr = new Move_Point_Right();
+    
+   Timer mainTimer = new Timer(time, this);
+//   Timer bigTimer = new Timer(time, this);
 	
 	public char c;
 	
@@ -138,17 +141,22 @@ public class Form1 implements ActionListener{
 	public int i56;
 	public String c56 = "";
 	public int IndLent; //Визначає довжину кольорового лінійного індикатора
-	public static JFrame frm;
+//	public static JFrame frm;
 	
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		start();
+	}
+	
+	public static void start() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					StartForm start = new StartForm();
 					start.frame.setVisible(true);
+					Count.isEnd = true;
 					start.button_1.addActionListener(new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
 							window = new Form1();
@@ -163,7 +171,7 @@ public class Form1 implements ActionListener{
 			}
 		});
 	}
-
+	
 	/**
 	 * Create the application.
 	 * @wbp.parser.entryPoint
@@ -638,8 +646,8 @@ public class Form1 implements ActionListener{
 			@Override
 			public void keyPressed(KeyEvent e) {
 			  	keyCode = e.getKeyCode();
-				if (keyCode == 37) new Move_Point_Left().movePointLeft(window); //Перемістити ліворуч
-				if (keyCode == 39) new Move_Point_Right().movePointRight(window); //Перемістити праворуч
+				if (keyCode == 37) mpl.movePointLeft(window); //Перемістити ліворуч
+				if (keyCode == 39) mpr.movePointRight(window); //Перемістити праворуч
 				
 			  	cs="";
 				cs = cs + keyCode;
@@ -649,11 +657,14 @@ public class Form1 implements ActionListener{
 		});
 		button7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
-				if (firstset == 0) button7.setBackground(blue);
-				if (firstset == 0) markersave = 0; //Маркер у комірці, відповідній  savecolor(0)
-				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
+				if (firstset == 0) {
+					new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
+					button7.setBackground(blue);
+					markersave = 0; //Маркер у комірці, відповідній  savecolor(0)
+					firstset = 1; //Більше не опрацьовувати
+				}
 				new Count().markerCount(window); //Підрахувати очки при встановленні маркера
+				mainTimer.restart();
 			}
 		});
 		button7.setHorizontalAlignment(SwingConstants.CENTER);
@@ -677,12 +688,14 @@ public class Form1 implements ActionListener{
 
 		button8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
-				if (firstset == 0) button8.setBackground(blue);
-				if (firstset == 0) markersave = 1; //Маркер у комірці, відповідній  savecolor(1)
-				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
+				if (firstset == 0) {
+					new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
+					button8.setBackground(blue);
+					markersave = 1; //Маркер у комірці, відповідній  savecolor(1)
+					firstset = 1; //Більше не опрацьовувати
+				}
 				new Count().markerCount(window); //Підрахувати очки при встановленні маркера
-			
+				mainTimer.restart();
 			}
 		});
 		button8.setHorizontalAlignment(SwingConstants.CENTER);
@@ -706,11 +719,14 @@ public class Form1 implements ActionListener{
 
 		button9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
-				if (firstset == 0) button9.setBackground(blue);
-				if (firstset == 0) markersave = 2; //Маркер у комірці, відповідній  savecolor(2)
-				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
+				if (firstset == 0) {
+					new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
+					button9.setBackground(blue);
+					markersave = 2; //Маркер у комірці, відповідній  savecolor(2)
+					firstset = 1; //Більше не опрацьовувати
+				}
 				new Count().markerCount(window); //Підрахувати очки при встановленні маркера
+				mainTimer.restart();
 			}
 		});
 		button9.setHorizontalAlignment(SwingConstants.CENTER);
@@ -734,11 +750,14 @@ public class Form1 implements ActionListener{
 
 		button10.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
-				if (firstset == 0) button10.setBackground(blue);
-				if (firstset == 0) markersave = 3; //Маркер у комірці, відповідній  savecolor(3)
-				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
+				if (firstset == 0) {
+					new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
+					button10.setBackground(blue);
+					markersave = 3; //Маркер у комірці, відповідній  savecolor(3)
+					firstset = 1; //Більше не опрацьовувати
+				}
 				new Count().markerCount(window); //Підрахувати очки при встановленні маркера
+				mainTimer.restart();
 			}
 		});
 		button10.setHorizontalAlignment(SwingConstants.CENTER);
@@ -762,11 +781,14 @@ public class Form1 implements ActionListener{
 
 		button11.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
-				if (firstset == 0) button11.setBackground(blue);
-				if (firstset == 0) markersave = 4; //Маркер у комірці, відповідній  savecolor(4)
-				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
+				if (firstset == 0) {
+					new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
+					button11.setBackground(blue);
+					markersave = 4; //Маркер у комірці, відповідній  savecolor(4)
+					firstset = 1; //Більше не опрацьовувати
+				}
 				new Count().markerCount(window); //Підрахувати очки при встановленні маркера
+				mainTimer.restart();
 			}
 		});
 		button11.setHorizontalAlignment(SwingConstants.CENTER);
@@ -790,11 +812,14 @@ public class Form1 implements ActionListener{
 
 		button12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
-				if (firstset == 0) button12.setBackground(blue);
-				if (firstset == 0) markersave = 5; //Маркер у комірці, відповідній  savecolor(5)
-				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
+				if (firstset == 0) {
+					new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
+					button12.setBackground(blue);
+					markersave = 5; //Маркер у комірці, відповідній  savecolor(5)
+					firstset = 1; //Більше не опрацьовувати
+				}
 				new Count().markerCount(window); //Підрахувати очки при встановленні маркера
+				mainTimer.restart();
 			}
 		});
 		button12.setHorizontalAlignment(SwingConstants.CENTER);
@@ -818,11 +843,14 @@ public class Form1 implements ActionListener{
 
 		button13.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
-				if (firstset == 0) button13.setBackground(blue);
-				if (firstset == 0) markersave = 6; //Маркер у комірці, відповідній  savecolor(6)
-				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
+				if (firstset == 0) {
+					new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
+					button13.setBackground(blue);
+					markersave = 6; //Маркер у комірці, відповідній  savecolor(6)
+					firstset = 1; //Більше не опрацьовувати
+				}
 				new Count().markerCount(window); //Підрахувати очки при встановленні маркера
+				mainTimer.restart();
 			}
 		});
 		button13.setHorizontalAlignment(SwingConstants.CENTER);
@@ -846,11 +874,14 @@ public class Form1 implements ActionListener{
 
 		button14.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (firstset == 0) new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
-				if (firstset == 0) button14.setBackground(blue);
-				if (firstset == 0) markersave = 7; //Маркер у комірці, відповідній  savecolor(7)
-				if (firstset == 0) firstset = 1; //Більше не опрацьовувати
+				if (firstset == 0) {
+					new Save_Color().saveColor(window); //Запам'ятати кольори комірок нижнього рядка
+					button14.setBackground(blue);
+					markersave = 7; //Маркер у комірці, відповідній  savecolor(7)
+					firstset = 1; //Більше не опрацьовувати
+				}
 				new Count().markerCount(window); //Підрахувати очки при встановленні маркера
+				mainTimer.restart();
 			}
 		});
 		button14.setHorizontalAlignment(SwingConstants.CENTER);
@@ -1231,7 +1262,9 @@ public class Form1 implements ActionListener{
 			if (IndLent == 9) {	
 			new Num_Move().numMove(window);
 			new Save_Color().markerReset(window);; //Відновити колір комірки с маркером
-			new Count().dnCount(window); //Підрахувати очки при зсуві зверху вниз
+			System.out.println(Count.isEnd);
+			if(Count.isEnd)
+				new Count().dnCount(window); //Підрахувати очки при зсуві зверху вниз
 			}
 			if (IndLent == 9) IndLent = 0; //Повний розмір індикатора
 			Print_Ind();   //Намалюємо індикатор
