@@ -11,6 +11,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTable;
 
 
 public class StartForm {
@@ -23,6 +24,8 @@ public class StartForm {
 	JButton btnNewButton ;
 	JButton button_2;
 	JButton button;
+	public JButton button_3;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -84,6 +87,26 @@ public class StartForm {
 		button_2.setBackground(new Color(0, 0, 205));
 		button_2.setBounds(667, 321, 571, 109);
 		frame.getContentPane().add(button_2);
+		
+		button_3 = new JButton("\u0420\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442\u0438");
+		button_3.setForeground(new Color(248, 248, 255));
+		button_3.setFont(new Font("Times New Roman", Font.BOLD, 45));
+		button_3.setBackground(new Color(0, 0, 205));
+		button_3.setBounds(126, 277, 445, 77);
+		frame.getContentPane().add(button_3);
+		
+		table = new JTable();
+		MyConnect m = new MyConnect();
+		m.openConn("Game");
+		table.setModel(new javax.swing.table.DefaultTableModel(
+	            m.arrayToObject(m.get()),
+	            new String [] {
+	               ""
+	            }
+	        ));
+	        table.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+		table.setBounds(108, 362, 463, 339);
+		frame.getContentPane().add(table);
 		frame.setBounds(5, 0, 1355, 740);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}

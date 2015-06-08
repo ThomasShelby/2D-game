@@ -1,3 +1,6 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JOptionPane;
 
 public class Count {
@@ -37,7 +40,9 @@ public class Count {
 				fr.mainTimer.stop();
 				JOptionPane.showMessageDialog (null, "Ви програли!");
 				Form1.start();
+				saveRes(fr);
 				Form1.window.frmMYaremchukGame.setVisible(false);
+				
 				 isEnd=false;
 			}
 			if (fr.et == 15) fr.m = fr.m - 10;
@@ -59,5 +64,23 @@ public class Count {
 	markerCount(fr); //процес підрахунку очків при встановленні маркера
 	new Level_Count().levelCount(fr); //Зсунути нумерацію рівнів Level
 	}
-
+	
+	public void saveRes(Form1 fr) {
+		ResultForm res = new ResultForm();
+		res.frame.setVisible(true);
+		res.button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				res.frame.setVisible(false);
+			}
+		});
+		res.btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MyConnect m = new MyConnect();
+				m.openConn("Game");
+				System.out.println(fr.button48.getText()+"   "+fr.showTimeButton.getText());
+				m.save(res.textField.getText(), fr.button48.getText(),fr.showTimeButton.getText());
+				res.frame.setVisible(false);
+			}
+		});
+	}
 }

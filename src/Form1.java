@@ -154,6 +154,7 @@ public class Form1 implements ActionListener{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					new MyConnect().openConn("Game");
 					StartForm start = new StartForm();
 					start.frame.setVisible(true);
 					Count.isEnd = true;
