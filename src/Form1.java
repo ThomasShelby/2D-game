@@ -166,6 +166,7 @@ public class Form1 implements ActionListener{
 
 	/**
 	 * Create the application.
+	 * @wbp.parser.entryPoint
 	 */
 	public Form1() {
 		initialize();
@@ -1223,6 +1224,8 @@ public class Form1 implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
+			a+=1;
+			showTimeButton.setText((a/5)+" сек");
 			IndLent = IndLent + 1; //Погасити ще один елемент кольорового індикатора
 			if (IndLent == 9) mainTimer.restart(); //Відновити інтервал роботи індикатора
 			if (IndLent == 9) {	
