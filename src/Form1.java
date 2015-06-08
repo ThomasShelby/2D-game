@@ -11,7 +11,11 @@ import javax.swing.JFrame;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
-
+/**
+ * 
+ * @author M.Yaremchuk
+ *
+ */
 public class Form1 implements ActionListener{
 
 	private JFrame frmMYaremchukGame;
@@ -71,6 +75,18 @@ public class Form1 implements ActionListener{
 	JButton button54 = new JButton();
 	JButton button55 = new JButton();
 	JButton button56 = new JButton();
+	JButton scoreFrameButton1 = new JButton();
+	JButton scoreButton = new JButton();
+	JButton button = new JButton();
+	JButton redFrameButton1 = new JButton();
+	JButton redFrameButton2 = new JButton();
+	JButton redFrameButton3 = new JButton();
+	JButton redFrameButton4 = new JButton();
+	JButton timeButton = new JButton();
+	JButton showTimeButton = new JButton();
+	JButton levelFrame1 = new JButton();
+	JButton levelFrame2 = new JButton();
+	JButton levelFrame3 = new JButton();
 
 	static Form1 window;
 	
@@ -85,9 +101,11 @@ public class Form1 implements ActionListener{
     public int vt;
     public int le[] = new int[5]; //Для нумерації рівнів Level
     
-//    public int time=1000;
+    public int time=200;
+    public int a=0;
     
-    Timer mainTimer = new Timer(500, this);
+    Timer mainTimer = new Timer(time, this);
+    Timer bigTimer = new Timer(time, this);
 	
 	public char c;
 	
@@ -554,54 +572,56 @@ public class Form1 implements ActionListener{
 		frmMYaremchukGame.setForeground(new Color(0, 51, 51));
 		frmMYaremchukGame.setFont(new Font("Times New Roman", Font.BOLD, 14));
 		frmMYaremchukGame.setTitle("M. Yaremchuk game");
-		frmMYaremchukGame.setBounds(5, 0, 1355, 740); //координати розміщення нашого вікна
+		frmMYaremchukGame.setBounds(0, 0, 1366, 740); //координати розміщення нашого вікна
 										//(5; 0)-верхня точка розташування нашого вікна; 
 										//1355-ширина вікна; 765- висота вікна
 		frmMYaremchukGame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmMYaremchukGame.getContentPane().setLayout(null);
 //		frmMYaremchukGame.add(new Engine());
 		
-		button1 = new JButton("Level");
-		button1.setFont(new Font("Times New Roman", Font.BOLD, 60));
+		button1 = new JButton("\u0420\u0456\u0432\u0435\u043D\u044C");
+		button1.setForeground(Color.BLACK);
+		button1.setFont(new Font("Times New Roman", Font.BOLD, 45));
 		button1.setHorizontalAlignment(SwingConstants.CENTER);
 		button1.setBackground(new Color(51, 153, 102));
-		button1.setBounds(10, 10, 180, 100);
+		button1.setBounds(10, 10, 180, 55);
 		frmMYaremchukGame.getContentPane().add(button1);
 		
 		button2 = new JButton("5");
-		button2.setForeground(new Color(0, 0, 0));
+		button2.setForeground(Color.DARK_GRAY);
 		button2.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button2.setHorizontalAlignment(SwingConstants.CENTER);
 		button2.setBackground(new Color(51, 153, 102));
-		button2.setBounds(10, 121, 160, 100);
+		button2.setBounds(10, 76, 124, 100);
 		frmMYaremchukGame.getContentPane().add(button2);
 		
 		button3 = new JButton("4");
 		button3.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button3.setHorizontalAlignment(SwingConstants.CENTER);
 		button3.setBackground(new Color(51, 153, 102));
-		button3.setBounds(10, 232, 160, 100);
+		button3.setBounds(10, 187, 124, 100);
 		frmMYaremchukGame.getContentPane().add(button3);
 		
 		button4 = new JButton("3");
 		button4.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button4.setHorizontalAlignment(SwingConstants.CENTER);
 		button4.setBackground(new Color(51, 153, 102));
-		button4.setBounds(10, 343, 160, 100);
+		button4.setBounds(10, 298, 124, 100);
 		frmMYaremchukGame.getContentPane().add(button4);
 		
 		button5 = new JButton("2");
 		button5.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button5.setHorizontalAlignment(SwingConstants.CENTER);
 		button5.setBackground(new Color(51, 153, 102));
-		button5.setBounds(10, 454, 160, 100);
+		button5.setBounds(10, 409, 124, 100);
 		frmMYaremchukGame.getContentPane().add(button5);
 		
 		button6 = new JButton("1");
-		button6.setFont(new Font("Times New Roman", Font.BOLD, 40));
+		button6.setForeground(Color.BLACK);
+		button6.setFont(new Font("Times New Roman", Font.BOLD, 50));
 		button6.setHorizontalAlignment(SwingConstants.CENTER);
 		button6.setBackground(new Color(51, 153, 102));
-		button6.setBounds(10, 565, 160, 100);
+		button6.setBounds(10, 544, 124, 100);
 		frmMYaremchukGame.getContentPane().add(button6);
 		
 		button7 = new JButton("+1");
@@ -630,7 +650,7 @@ public class Form1 implements ActionListener{
 		button7.setHorizontalAlignment(SwingConstants.CENTER);
 		button7.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button7.setBackground(new Color(255, 250, 205));
-		button7.setBounds(180, 565, 135, 100);
+		button7.setBounds(180, 544, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button7);
 		
 		button8 = new JButton("-15");
@@ -659,7 +679,7 @@ public class Form1 implements ActionListener{
 		button8.setHorizontalAlignment(SwingConstants.CENTER);
 		button8.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button8.setBackground(new Color(255, 250, 205));
-		button8.setBounds(325, 565, 135, 100);
+		button8.setBounds(322, 544, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button8);
 		
 		button9 = new JButton("+15");
@@ -687,7 +707,7 @@ public class Form1 implements ActionListener{
 		button9.setHorizontalAlignment(SwingConstants.CENTER);
 		button9.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button9.setBackground(new Color(255, 250, 205));
-		button9.setBounds(470, 565, 135, 100);
+		button9.setBounds(464, 544, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button9);
 		
 		button10 = new JButton(" +100 ");
@@ -715,7 +735,7 @@ public class Form1 implements ActionListener{
 		button10.setHorizontalAlignment(SwingConstants.CENTER);
 		button10.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button10.setBackground(new Color(123, 104, 238));
-		button10.setBounds(615, 565, 135, 100);
+		button10.setBounds(606, 544, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button10);
 		
 		button11 = new JButton("+10");
@@ -743,7 +763,7 @@ public class Form1 implements ActionListener{
 		button11.setHorizontalAlignment(SwingConstants.CENTER);
 		button11.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button11.setBackground(new Color(255, 250, 205));
-		button11.setBounds(760, 565, 135, 100);
+		button11.setBounds(748, 544, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button11);
 		
 		button12 = new JButton("-25");
@@ -771,7 +791,7 @@ public class Form1 implements ActionListener{
 		button12.setHorizontalAlignment(SwingConstants.CENTER);
 		button12.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button12.setBackground(new Color(255, 250, 205));
-		button12.setBounds(905, 565, 135, 100);
+		button12.setBounds(890, 544, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button12);
 		
 		button13 = new JButton("+15");
@@ -799,7 +819,7 @@ public class Form1 implements ActionListener{
 		button13.setHorizontalAlignment(SwingConstants.CENTER);
 		button13.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button13.setBackground(new Color(255, 250, 205));
-		button13.setBounds(1050, 565, 135, 100);
+		button13.setBounds(1032, 544, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button13);
 		
 		button14 = new JButton("-25");
@@ -827,14 +847,14 @@ public class Form1 implements ActionListener{
 		button14.setHorizontalAlignment(SwingConstants.CENTER);
 		button14.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button14.setBackground(new Color(255, 250, 205));
-		button14.setBounds(1195, 565, 135, 100);
+		button14.setBounds(1174, 544, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button14);
 		
 		button15 = new JButton("-200");
 		button15.setHorizontalAlignment(SwingConstants.CENTER);
 		button15.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button15.setBackground(Color.YELLOW);
-		button15.setBounds(180, 454, 135, 100);
+		button15.setBounds(180, 409, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button15);
 		
 		button16 = new JButton("Null");
@@ -842,63 +862,63 @@ public class Form1 implements ActionListener{
 		button16.setHorizontalAlignment(SwingConstants.CENTER);
 		button16.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button16.setBackground(Color.BLACK);
-		button16.setBounds(325, 454, 135, 100);
+		button16.setBounds(322, 409, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button16);
 		
 		button17 = new JButton("-10");
 		button17.setHorizontalAlignment(SwingConstants.CENTER);
 		button17.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button17.setBackground(new Color(255, 250, 205));
-		button17.setBounds(470, 454, 135, 100);
+		button17.setBounds(464, 409, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button17);
 		
 		button18 = new JButton("-200");
 		button18.setHorizontalAlignment(SwingConstants.CENTER);
 		button18.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button18.setBackground(Color.YELLOW);
-		button18.setBounds(615, 454, 135, 100);
+		button18.setBounds(606, 409, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button18);
 		
 		button19 = new JButton("+500");
 		button19.setHorizontalAlignment(SwingConstants.CENTER);
 		button19.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button19.setBackground(new Color(204, 255, 153));
-		button19.setBounds(760, 454, 135, 100);
+		button19.setBounds(748, 409, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button19);
 		
 		button20 = new JButton("+5");
 		button20.setHorizontalAlignment(SwingConstants.CENTER);
 		button20.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button20.setBackground(new Color(255, 250, 205));
-		button20.setBounds(905, 454, 135, 100);
+		button20.setBounds(890, 409, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button20);
 		
 		button21 = new JButton("+1");
 		button21.setHorizontalAlignment(SwingConstants.CENTER);
 		button21.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button21.setBackground(new Color(255, 250, 205));
-		button21.setBounds(1050, 454, 135, 100);
+		button21.setBounds(1032, 409, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button21);
 		
 		button22 = new JButton("-200");
 		button22.setHorizontalAlignment(SwingConstants.CENTER);
 		button22.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button22.setBackground(Color.YELLOW);
-		button22.setBounds(1195, 454, 135, 100);
+		button22.setBounds(1174, 409, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button22);
 		
 		button23 = new JButton("-25");
 		button23.setHorizontalAlignment(SwingConstants.CENTER);
 		button23.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button23.setBackground(new Color(255, 250, 205));
-		button23.setBounds(180, 343, 135, 100);
+		button23.setBounds(180, 298, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button23);
 		
 		button24 = new JButton("+5");
 		button24.setHorizontalAlignment(SwingConstants.CENTER);
 		button24.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button24.setBackground(new Color(255, 250, 205));
-		button24.setBounds(325, 343, 135, 100);
+		button24.setBounds(322, 298, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button24);
 		
 		button25 = new JButton("End");
@@ -906,28 +926,28 @@ public class Form1 implements ActionListener{
 		button25.setHorizontalAlignment(SwingConstants.CENTER);
 		button25.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button25.setBackground(Color.RED);
-		button25.setBounds(470, 343, 135, 100);
+		button25.setBounds(464, 298, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button25);
 		
 		button26 = new JButton("+15");
 		button26.setHorizontalAlignment(SwingConstants.CENTER);
 		button26.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button26.setBackground(new Color(255, 250, 205));
-		button26.setBounds(615, 343, 135, 100);
+		button26.setBounds(606, 298, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button26);
 		
 		button27 = new JButton("-25");
 		button27.setHorizontalAlignment(SwingConstants.CENTER);
 		button27.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button27.setBackground(new Color(255, 250, 205));
-		button27.setBounds(760, 343, 135, 100);
+		button27.setBounds(748, 298, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button27);
 		
 		button28 = new JButton("-200");
 		button28.setHorizontalAlignment(SwingConstants.CENTER);
 		button28.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button28.setBackground(Color.YELLOW);
-		button28.setBounds(905, 343, 135, 100);
+		button28.setBounds(890, 298, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button28);
 		
 		button29 = new JButton("Null");
@@ -935,42 +955,42 @@ public class Form1 implements ActionListener{
 		button29.setHorizontalAlignment(SwingConstants.CENTER);
 		button29.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button29.setBackground(Color.BLACK);
-		button29.setBounds(1050, 343, 135, 100);
+		button29.setBounds(1032, 298, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button29);
 		
 		button30 = new JButton("+500");
 		button30.setHorizontalAlignment(SwingConstants.CENTER);
 		button30.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button30.setBackground(new Color(204, 255, 153));
-		button30.setBounds(1195, 343, 135, 100);
+		button30.setBounds(1174, 298, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button30);
 		
 		button31 = new JButton("+500");
 		button31.setHorizontalAlignment(SwingConstants.CENTER);
 		button31.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button31.setBackground(new Color(204, 255, 153));
-		button31.setBounds(180, 232, 135, 100);
+		button31.setBounds(180, 187, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button31);
 		
 		button32 = new JButton("+10");
 		button32.setHorizontalAlignment(SwingConstants.CENTER);
 		button32.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button32.setBackground(new Color(255, 250, 205));
-		button32.setBounds(325, 232, 135, 100);
+		button32.setBounds(322, 187, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button32);
 		
 		button33 = new JButton("-200");
 		button33.setHorizontalAlignment(SwingConstants.CENTER);
 		button33.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button33.setBackground(Color.YELLOW);
-		button33.setBounds(470, 232, 135, 100);
+		button33.setBounds(464, 187, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button33);
 		
 		button34 = new JButton("-25");
 		button34.setHorizontalAlignment(SwingConstants.CENTER);
 		button34.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button34.setBackground(new Color(255, 250, 205));
-		button34.setBounds(615, 232, 135, 100);
+		button34.setBounds(606, 187, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button34);
 		
 		button35 = new JButton("Null");
@@ -978,97 +998,99 @@ public class Form1 implements ActionListener{
 		button35.setHorizontalAlignment(SwingConstants.CENTER);
 		button35.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button35.setBackground(Color.BLACK);
-		button35.setBounds(760, 232, 135, 100);
+		button35.setBounds(748, 187, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button35);
 		
 		button36 = new JButton("+15");
 		button36.setHorizontalAlignment(SwingConstants.CENTER);
 		button36.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button36.setBackground(new Color(255, 250, 205));
-		button36.setBounds(905, 232, 135, 100);
+		button36.setBounds(890, 187, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button36);
 		
 		button37 = new JButton("+10");
 		button37.setHorizontalAlignment(SwingConstants.CENTER);
 		button37.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button37.setBackground(new Color(255, 250, 205));
-		button37.setBounds(1050, 232, 135, 100);
+		button37.setBounds(1032, 187, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button37);
 		
 		button38 = new JButton("-25");
 		button38.setHorizontalAlignment(SwingConstants.CENTER);
 		button38.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button38.setBackground(new Color(255, 250, 205));
-		button38.setBounds(1195, 232, 135, 100);
+		button38.setBounds(1174, 187, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button38);
 		
 		button39 = new JButton("+15");
+		button39.setForeground(Color.DARK_GRAY);
 		button39.setHorizontalAlignment(SwingConstants.CENTER);
 		button39.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button39.setBackground(new Color(153, 255, 153));
-		button39.setBounds(180, 121, 135, 100);
+		button39.setBounds(180, 76, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button39);
 		
 		button40 = new JButton("-25");
+		button40.setForeground(Color.DARK_GRAY);
 		button40.setHorizontalAlignment(SwingConstants.CENTER);
 		button40.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button40.setBackground(new Color(255, 250, 205));
-		button40.setBounds(325, 121, 135, 100);
+		button40.setBounds(322, 76, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button40);
 		
 		button41 = new JButton("+500");
+		button41.setForeground(Color.DARK_GRAY);
 		button41.setHorizontalAlignment(SwingConstants.CENTER);
 		button41.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button41.setBackground(new Color(50, 205, 50));
-		button41.setBounds(470, 121, 135, 100);
+		button41.setBounds(464, 76, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button41);
 		
 		button42 = new JButton("+10");
+		button42.setForeground(Color.DARK_GRAY);
 		button42.setHorizontalAlignment(SwingConstants.CENTER);
 		button42.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button42.setBackground(new Color(255, 250, 205));
-		button42.setBounds(615, 121, 135, 100);
+		button42.setBounds(606, 76, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button42);
 		
 		button43 = new JButton("-1");
+		button43.setForeground(Color.DARK_GRAY);
 		button43.setHorizontalAlignment(SwingConstants.CENTER);
 		button43.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button43.setBackground(new Color(255, 250, 205));
-		button43.setBounds(760, 121, 135, 100);
+		button43.setBounds(748, 76, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button43);
 		
 		button44 = new JButton("-200");
+		button44.setForeground(Color.DARK_GRAY);
 		button44.setHorizontalAlignment(SwingConstants.CENTER);
 		button44.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button44.setBackground(Color.YELLOW);
-		button44.setBounds(905, 121, 135, 100);
+		button44.setBounds(890, 76, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button44);
 		
 		button45 = new JButton("+100");
+		button45.setForeground(Color.DARK_GRAY);
 		button45.setHorizontalAlignment(SwingConstants.CENTER);
 		button45.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button45.setBackground(new Color(204, 255, 255));
-		button45.setBounds(1050, 121, 135, 100);
+		button45.setBounds(1032, 76, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button45);
 		
 		button46 = new JButton("+10");
+		button46.setForeground(Color.DARK_GRAY);
 		button46.setHorizontalAlignment(SwingConstants.CENTER);
 		button46.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button46.setBackground(new Color(255, 250, 205));
-		button46.setBounds(1195, 121, 135, 100);
+		button46.setBounds(1174, 76, 132, 100);
 		frmMYaremchukGame.getContentPane().add(button46);
-		
-		button47 = new JButton("M. Yaremchuk Game");
-		button47.setBackground(new Color(204, 102, 204));
-		button47.setFont(new Font("Times New Roman", Font.BOLD, 60));
-		button47.setBounds(200, 10, 719, 100);
-		frmMYaremchukGame.getContentPane().add(button47);
 		
 		button48 = new JButton(" 0 ");
 		button48.setHorizontalAlignment(SwingConstants.CENTER);
 		button48.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button48.setBackground(new Color(255, 250, 205));
-		button48.setBounds(1040, 55, 180, 55);
+		button48.setBounds(590, 10, 180, 55);
 		frmMYaremchukGame.getContentPane().add(button48);
 		
 		button49 = new JButton("");
@@ -1120,30 +1142,79 @@ public class Form1 implements ActionListener{
 		button55.setBounds(1040, 676, 145, 20);
 		frmMYaremchukGame.getContentPane().add(button55);
 		
-		JButton btnNewButton = new JButton("\u0420\u0430\u0445\u0443\u043D\u043E\u043A:");
-		btnNewButton.setBackground(Color.ORANGE);
-		btnNewButton.setForeground(Color.BLACK);
-		btnNewButton.setFont(new Font("Times New Roman", Font.BOLD, 45));
-		btnNewButton.setBounds(929, 10, 400, 48);
-		frmMYaremchukGame.getContentPane().add(btnNewButton);
+		scoreButton = new JButton("\u0420\u0430\u0445\u0443\u043D\u043E\u043A:");
+		scoreButton.setBackground(Color.ORANGE);
+		scoreButton.setForeground(Color.BLACK);
+		scoreButton.setFont(new Font("Times New Roman", Font.BOLD, 45));
+		scoreButton.setBounds(226, 10, 260, 55);
+		frmMYaremchukGame.getContentPane().add(scoreButton);
 		
-		JButton btnNewButton_1 = new JButton(">>>");
-		btnNewButton_1.setFont(new Font("Times New Roman", Font.BOLD, 40));
-		btnNewButton_1.setBackground(Color.ORANGE);
-		btnNewButton_1.setBounds(929, 55, 115, 55);
-		frmMYaremchukGame.getContentPane().add(btnNewButton_1);
+		scoreFrameButton1 = new JButton(">>>");
+		scoreFrameButton1.setFont(new Font("Times New Roman", Font.BOLD, 40));
+		scoreFrameButton1.setBackground(Color.ORANGE);
+		scoreFrameButton1.setBounds(479, 10, 115, 55);
+		frmMYaremchukGame.getContentPane().add(scoreFrameButton1);
 		
-		JButton button = new JButton("<<<");
+		button = new JButton("<<<");
 		button.setFont(new Font("Times New Roman", Font.BOLD, 40));
 		button.setBackground(Color.ORANGE);
-		button.setBounds(1214, 55, 115, 55);
+		button.setBounds(768, 10, 115, 55);
 		frmMYaremchukGame.getContentPane().add(button);
+		
+		redFrameButton2 = new JButton("");
+		redFrameButton2.setBackground(new Color(255, 0, 0));
+		redFrameButton2.setBounds(155, 520, 1175, 13);
+		frmMYaremchukGame.getContentPane().add(redFrameButton2);
+		
+		redFrameButton3 = new JButton("");
+		redFrameButton3.setBackground(Color.RED);
+		redFrameButton3.setBounds(155, 657, 1175, 13);
+		frmMYaremchukGame.getContentPane().add(redFrameButton3);
+		
+		redFrameButton1 = new JButton("");
+		redFrameButton1.setBackground(new Color(255, 0, 0));
+		redFrameButton1.setBounds(155, 520, 14, 150);
+		frmMYaremchukGame.getContentPane().add(redFrameButton1);
+		
+		redFrameButton4 = new JButton("");
+		redFrameButton4.setBackground(Color.RED);
+		redFrameButton4.setBounds(1316, 520, 14, 150);
+		frmMYaremchukGame.getContentPane().add(redFrameButton4);
+		
+		timeButton = new JButton("\u0427\u0430\u0441 :");
+		timeButton.setForeground(Color.BLACK);
+		timeButton.setBackground(new Color(0, 191, 255));
+		timeButton.setFont(new Font("Times New Roman", Font.BOLD, 45));
+		timeButton.setBounds(940, 10, 200, 55);
+		frmMYaremchukGame.getContentPane().add(timeButton);
+		
+		showTimeButton = new JButton("");
+		showTimeButton.setBackground(new Color(224, 255, 255));
+		showTimeButton.setText(""+a);
+		showTimeButton.setFont(new Font("Times New Roman", Font.BOLD, 40));
+		showTimeButton.setBounds(1150, 10, 180, 55);
+		frmMYaremchukGame.getContentPane().add(showTimeButton);
+		
+		levelFrame1 = new JButton("");
+		levelFrame1.setBackground(new Color(0, 250, 154));
+		levelFrame1.setBounds(0, 520, 155, 13);
+		frmMYaremchukGame.getContentPane().add(levelFrame1);
+		
+		levelFrame2 = new JButton("");
+		levelFrame2.setBackground(new Color(0, 250, 154));
+		levelFrame2.setBounds(0, 657, 155, 13);
+		frmMYaremchukGame.getContentPane().add(levelFrame2);
+		
+		levelFrame3 = new JButton("New button");
+		levelFrame3.setBackground(new Color(0, 250, 154));
+		levelFrame3.setBounds(139, 76, 14, 594);
+		frmMYaremchukGame.getContentPane().add(levelFrame3);
 		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-
+		
 			IndLent = IndLent + 1; //Погасити ще один елемент кольорового індикатора
 			if (IndLent == 9) mainTimer.restart(); //Відновити інтервал роботи індикатора
 			if (IndLent == 9) {	

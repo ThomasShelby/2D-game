@@ -1,3 +1,5 @@
+import javax.swing.JOptionPane;
+
 public class Count {
 	public void markerCount(Form1 fr)
 	{//Підрахунок очків при перестановці маркера
@@ -28,7 +30,8 @@ public class Count {
 			if (fr.et == 11) fr.m = fr.m - 200;
 			if (fr.et == 12) fr.m = 0;
 			if (fr.et == 13) fr.m = 0;
-			if (fr.et == 14) System.exit(0);
+			//JOptionPane.showConfirmDialog (null, “key pressed”);
+			if (fr.et == 14) JOptionPane.showMessageDialog (null, "Ви програли!");
 			if (fr.et == 15) fr.m = fr.m - 10;
 			if (fr.et == 16) fr.m = fr.m - 5;
 			if (fr.et == 17) fr.m = fr.m - 1;

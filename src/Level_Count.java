@@ -26,6 +26,12 @@ public class Level_Count {
 	pr.le[4] += 1;
 	pr.cs = pr.cs + pr.le[4];
 	pr.button2.setText(pr.cs);
-//	mainTimer.setDelay(time-=50);
+	
+/*	if(pr.time>0){
+	pr.mainTimer.setDelay(pr.time-=50);
+	}else{
+	pr.time=0;
 	}
+	System.out.println(pr.time);
+*/	}
 }

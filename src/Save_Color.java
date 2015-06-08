@@ -1,8 +1,7 @@
 public class Save_Color{
 
 	public void saveColor(Form1 fr) 
-	{
-		//Збереження кольорових атрибутів всіх комірок нижнього рядка 
+	{	//Збереження кольорових атрибутів всіх комірок нижнього рядка 
 
 		fr.savecolor[0] = fr.button7.getBackground();
 		fr.savecolor[1] = fr.button8.getBackground();
