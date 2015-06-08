@@ -21,6 +21,8 @@ public class StartForm {
 	
 	JButton button_1 ;
 	JButton btnNewButton ;
+	JButton button_2;
+	JButton button;
 
 	/**
 	 * Launch the application.
@@ -61,7 +63,7 @@ public class StartForm {
 		btnNewButton.setBounds(108, 39, 1130, 123);
 		frame.getContentPane().add(btnNewButton);
 		
-		JButton button = new JButton("\u041E\u0431\u0435\u0440\u0456\u0442\u044C \u0440\u0435\u0436\u0438\u043C \u0433\u0440\u0438:");
+		button = new JButton("\u041E\u0431\u0435\u0440\u0456\u0442\u044C \u0440\u0435\u0436\u0438\u043C \u0433\u0440\u0438:");
 		button.setBackground(new Color(102, 205, 170));
 		button.setFont(new Font("Times New Roman", Font.BOLD, 45));
 		button.setBounds(108, 178, 463, 88);
@@ -75,6 +77,13 @@ public class StartForm {
 		button_1.setBackground(new Color(0, 0, 205));
 		button_1.setBounds(667, 173, 571, 109);
 		frame.getContentPane().add(button_1);
+		
+		button_2 = new JButton(" 100 \u0440\u0456\u0432\u043D\u0456\u0432");
+		button_2.setForeground(new Color(248, 248, 255));
+		button_2.setFont(new Font("Times New Roman", Font.BOLD, 45));
+		button_2.setBackground(new Color(0, 0, 205));
+		button_2.setBounds(667, 321, 571, 109);
+		frame.getContentPane().add(button_2);
 		frame.setBounds(5, 0, 1355, 740);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}

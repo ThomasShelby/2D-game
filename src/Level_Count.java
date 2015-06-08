@@ -1,6 +1,8 @@
+import javax.swing.JOptionPane;
+
 public class Level_Count {
 	
-	private boolean increaseSpeed=true;
+	static boolean increaseSpeed=true;
 	
 	public void levelCount(Form1 pr)
 	{ //процес зсуву нумерації поточних ігрових рівнів
@@ -34,6 +36,10 @@ public class Level_Count {
 		speed(pr);
 	}
 	
+	if(!increaseSpeed){
+		maxLevel(pr);
+	}
+	
 	System.out.println(pr.time);
 	}
 	
@@ -43,5 +49,14 @@ public class Level_Count {
 			}else{
 			pr.time=0;
 			}
+	}
+	
+	public void maxLevel(Form1 pr){
+		if(pr.le[0] == 100){
+				pr.mainTimer.stop();
+				JOptionPane.showMessageDialog (null, "Кінець гри!");
+				Form1.start();
+				Form1.window.frmMYaremchukGame.setVisible(false);
+		}
 	}
 }

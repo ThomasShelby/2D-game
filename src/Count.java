@@ -40,12 +40,12 @@ public class Count {
 				Form1.window.frmMYaremchukGame.setVisible(false);
 				 isEnd=false;
 			}
-			if (fr.et == 15 && isEnd) fr.m = fr.m - 10;
-			if (fr.et == 16 && isEnd) fr.m = fr.m - 5;
-			if (fr.et == 17 && isEnd) fr.m = fr.m - 1;
-			if (fr.et == 18 && isEnd) fr.m = fr.m + 1;
-			if (fr.et == 19 && isEnd) fr.m = fr.m + 50;
-			if (fr.et == 20 && isEnd) fr.m = fr.m - 25;
+			if (fr.et == 15) fr.m = fr.m - 10;
+			if (fr.et == 16) fr.m = fr.m - 5;
+			if (fr.et == 17) fr.m = fr.m - 1;
+			if (fr.et == 18) fr.m = fr.m + 1;
+			if (fr.et == 19) fr.m = fr.m + 50;
+			if (fr.et == 20) fr.m = fr.m - 25;
 			fr.cs = fr.cs + fr.m;
 			fr.button48.setText(fr.cs);
 			fr.n = 1; //Більше не опрацьовувати

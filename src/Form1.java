@@ -163,7 +163,17 @@ public class Form1 implements ActionListener{
 							window.frmMYaremchukGame.setVisible(true);
 							start.frame.setVisible(false);
 						}
-					}); 
+					});
+					
+					start.button_2.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent e) {
+							window = new Form1();
+							window.frmMYaremchukGame.setVisible(true);
+							start.frame.setVisible(false);
+							Level_Count.increaseSpeed=false;
+//							Count.isEnd=false;
+						}
+					});
 					
 				} catch (Exception e) {
 					e.printStackTrace();
