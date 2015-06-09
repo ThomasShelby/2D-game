@@ -161,6 +161,7 @@ public class Form1 implements ActionListener{
 							window = new Form1();
 							window.frmMYaremchukGame.setVisible(true);
 							start.frame.setVisible(false);
+							Count.isMod = true;
 						}
 					});
 					
@@ -170,6 +171,7 @@ public class Form1 implements ActionListener{
 							window.frmMYaremchukGame.setVisible(true);
 							start.frame.setVisible(false);
 							Level_Count.increaseSpeed=false;
+							Count.isMod = false;
 						}
 					});
 					

@@ -5,7 +5,7 @@ import javax.swing.JOptionPane;
 
 public class Count {
 	static boolean isEnd=true;
-	
+	static boolean isMod = true;
 	public void markerCount(Form1 fr)
 	{//Підрахунок очків при перестановці маркера
 	
@@ -39,8 +39,10 @@ public class Count {
 			if (fr.et == 14) {
 				fr.mainTimer.stop();
 				JOptionPane.showMessageDialog (null, "Ви програли!");
-				Form1.start();
-				saveRes(fr);
+				
+				
+				ResultForm res = new ResultForm();
+				saveRes(fr,res);
 				Form1.window.frmMYaremchukGame.setVisible(false);
 				
 				 isEnd=false;
@@ -65,21 +67,28 @@ public class Count {
 	new Level_Count().levelCount(fr); //Зсунути нумерацію рівнів Level
 	}
 	
-	public void saveRes(Form1 fr) {
-		ResultForm res = new ResultForm();
+	public void saveRes(Form1 fr,ResultForm res) {
+		
 		res.frame.setVisible(true);
 		res.button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				res.frame.setVisible(false);
+				Form1.start();
 			}
 		});
 		res.btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String mod = "";
+				if(isMod)
+					mod = "SpeedMode";
+				else
+					mod = "100 levels";
 				MyConnect m = new MyConnect();
 				m.openConn("Game");
 				System.out.println(fr.button48.getText()+"   "+fr.showTimeButton.getText());
-				m.save(res.textField.getText(), fr.button48.getText(),fr.showTimeButton.getText());
+				m.save(res.textField.getText(), fr.button48.getText(),fr.showTimeButton.getText(),mod);
 				res.frame.setVisible(false);
+				Form1.start();
 			}
 		});
 	}
